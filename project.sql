@@ -111,13 +111,6 @@ VALUES
 );
 
 
-INSERT INTO Ticket_Classes ( class_name, upgrade_charge )
-VALUES 
-("First Class", 200),
-("Business", 100),
-("Economy" , 0);
-
-
 INSERT INTO Itineraries (passenger_id, trip_name)
 VALUES
 (
@@ -126,18 +119,13 @@ VALUES
 );
 
 
-INSERT INTO Tickets (
-    itinerary_id,
-    flight_id,
-    ticket_class
-)
+INSERT INTO Tickets (itinerary_id, flight_id, ticket_class)
 VALUES
 (
     (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Archer Vacation 2022'),
     (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 1),
     (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'First Class')
 );
-
 
 
 SET FOREIGN_KEY_CHECKS=1;
