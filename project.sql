@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS Flights;
 DROP TABLE IF EXISTS Airports;
 DROP TABLE IF EXISTS Tickets;
 DROP TABLE IF EXISTS Ticket_Classes;
+DROP TABLE IF EXISTS Itineraries;
 
 
 /* Create Passengers Table*/
@@ -114,7 +115,7 @@ VALUES
 INSERT INTO Itineraries (passenger_id, trip_name)
 VALUES
 (
-    (SELECT Passengers.passenger_id FROM Passengers WHERE Passengers.passport = '652190223'),
+    (SELECT Passengers.passenger_id FROM Passengers WHERE Passengers.passport = '542637785'),
     "Archer Vacation 2022"
 );
 
