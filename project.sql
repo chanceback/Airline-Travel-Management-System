@@ -31,8 +31,8 @@ CREATE TABLE Flights(
     air_fare int NOT NULL,
     capacity int NOT NULL,
     PRIMARY KEY (flight_id),
-    FOREIGN KEY (departing_airport) REFERENCES Airports(airport_id),
-    FOREIGN KEY (arrival_airport) REFERENCES Airports(airport_id)
+    FOREIGN KEY (departing_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE,
+    FOREIGN KEY (arrival_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE
 );
 
 /* Create Airports Table*/
@@ -51,8 +51,8 @@ CREATE TABLE Tickets(
     flight_id int NOT NULL,
     ticket_class int NOT NULL,
     PRIMARY KEY (ticket_id), 
-    FOREIGN KEY (itinerary_id) REFERENCES Itineraries(itinerary_id),
-    FOREIGN KEY (flight_id) REFERENCES Flights(flight_id),
+    FOREIGN KEY (itinerary_id) REFERENCES Itineraries(itinerary_id) ON DELETE CASCADE,
+    FOREIGN KEY (flight_id) REFERENCES Flights(flight_id) ON DELETE CASCADE,
     FOREIGN KEY (ticket_class) REFERENCES Ticket_Classes(class_id)
 );
 
@@ -70,7 +70,7 @@ CREATE TABLE Itineraries(
     passenger_id int NOT NULL,
     trip_name varchar(255) UNIQUE NOT NULL,
     PRIMARY KEY (itinerary_id),
-    FOREIGN KEY (passenger_id) REFERENCES Passengers(passenger_id)
+    FOREIGN KEY (passenger_id) REFERENCES Passengers(passenger_id) ON DELETE CASCADE
 );
 
 
