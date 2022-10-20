@@ -36,7 +36,7 @@ CREATE TABLE Flights(
 );
 
 /* Create Airports Table*/
-CREATE OR REPLACE TABLE Airports(
+CREATE TABLE Airports(
     airport_id int AUTO_INCREMENT NOT NULL,
     airport_name varchar(255) NOT NULL,
     airport_location varchar(255) NOT NULL,
@@ -109,6 +109,22 @@ VALUES
     '2022-10-30 14:00:00',
     5000,
     70
+),
+(
+    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'Sydney Airport'),
+    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'Incheon Airport'),
+    '2022-11-01 07:00:00',
+    '2022-11-01 15:00:00',
+    5000,
+    70
+),
+(
+    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'LaGuardia Airport'),
+    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'Narita Airport'),
+    '2023-02-20 08:00:00',
+    '2023-02-21 20:00:00',
+    5000,
+    70
 );
 
 
@@ -117,6 +133,14 @@ VALUES
 (
     (SELECT Passengers.passenger_id FROM Passengers WHERE Passengers.passport = '542637785'),
     "Archer Vacation 2022"
+),
+(
+    (SELECT Passengers.passenger_id FROM Passengers WHERE Passengers.passport = '919608451'),
+    "Bonnet Business Trip"
+),
+(
+    (SELECT Passengers.passenger_id FROM Passengers WHERE Passengers.passport = '678996728'),
+    "Buffy Family Trip"
 );
 
 
@@ -126,6 +150,21 @@ VALUES
     (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Archer Vacation 2022'),
     (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 1),
     (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'First Class')
+),
+(
+    (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Bonnet Business Trip'),
+    (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 1),
+    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Business')
+),
+(
+    (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Bonnet Business Trip'),
+    (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 2),
+    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Business')
+),
+(
+    (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Buffy Family Trip'),
+    (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 3),
+    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Economy')
 );
 
 
