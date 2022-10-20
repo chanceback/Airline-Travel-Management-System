@@ -53,7 +53,7 @@ CREATE TABLE Tickets(
     PRIMARY KEY (ticket_id), 
     FOREIGN KEY (itinerary_id) REFERENCES Itineraries(itinerary_id) ON DELETE CASCADE,
     FOREIGN KEY (flight_id) REFERENCES Flights(flight_id) ON DELETE CASCADE,
-    FOREIGN KEY (ticket_class) REFERENCES Ticket_Classes(class_id)
+    FOREIGN KEY (ticket_class) REFERENCES Ticket_Classes(class_id) ON DELETE CASCADE
 );
 
 /* Create Ticket_Classes Table */
