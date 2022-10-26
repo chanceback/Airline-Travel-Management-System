@@ -21,27 +21,35 @@ CREATE TABLE Passengers(
     PRIMARY KEY (passenger_id)
 );
 
+/* Create Airports Table*/
+CREATE TABLE Airports(
+    airport_id varchar(4) UNIQUE NOT NULL,
+    airport_name varchar(255) NOT NULL,
+    airport_location varchar(255) NOT NULL,
+    description varchar(1000) NOT NULL,
+    PRIMARY KEY (airport_id)
+);
+
 /* Create Flights Table */
 CREATE TABLE Flights(
     flight_id int AUTO_INCREMENT NOT NULL,
-    departing_airport int NOT NULL,
-    arrival_airport int NOT NULL,
+    departure_airport varchar(4) NOT NULL,
+    arrival_airport varchar(4) NOT NULL,
     departure_time timestamp NOT NULL,
     arrival_time timestamp NOT NULL,
     air_fare int NOT NULL,
     capacity int NOT NULL,
     PRIMARY KEY (flight_id),
-    FOREIGN KEY (departing_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE,
+    FOREIGN KEY (departure_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE,
     FOREIGN KEY (arrival_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE
 );
 
-/* Create Airports Table*/
-CREATE TABLE Airports(
-    airport_id int AUTO_INCREMENT NOT NULL,
-    airport_name varchar(255) NOT NULL,
-    airport_location varchar(255) NOT NULL,
-    description varchar(1000) NOT NULL,
-    PRIMARY KEY (airport_id)
+/* Create Ticket_Classes Table */
+CREATE TABLE Ticket_Classes(
+    ticket_class_id int AUTO_INCREMENT NOT NULL,
+    class_name varchar(25) UNIQUE NOT NULL,
+    upgrade_charge int NOT NULL,
+    PRIMARY KEY (ticket_class_id)
 );
 
 /* Create Tickets Table */
@@ -49,19 +57,11 @@ CREATE TABLE Tickets(
     ticket_id int AUTO_INCREMENT NOT NULL,
     itinerary_id int NOT NULL,
     flight_id int NOT NULL,
-    ticket_class int NOT NULL,
+    ticket_class_id int NOT NULL,
     PRIMARY KEY (ticket_id), 
     FOREIGN KEY (itinerary_id) REFERENCES Itineraries(itinerary_id) ON DELETE CASCADE,
     FOREIGN KEY (flight_id) REFERENCES Flights(flight_id) ON DELETE CASCADE,
-    FOREIGN KEY (ticket_class) REFERENCES Ticket_Classes(class_id) ON DELETE CASCADE
-);
-
-/* Create Ticket_Classes Table */
-CREATE TABLE Ticket_Classes(
-    class_id int AUTO_INCREMENT NOT NULL,
-    class_name varchar(25) NOT NULL,
-    upgrade_charge int NOT NULL,
-    PRIMARY KEY (class_id)
+    FOREIGN KEY (ticket_class_id) REFERENCES Ticket_Classes(ticket_class_id) ON DELETE CASCADE
 );
 
 /* Create Itineraries Table */
@@ -84,14 +84,14 @@ VALUES('Sterling', 'Archer', '542637785', 'archer@hello.com', '814-825-5951'),
 ('Buffy', 'Summers', '678996728', 'summers@hello.com', '813-273-1085'),
 ('Jeff', 'Winger', '218571886', 'winger@hello.com', '408-558-2426');
 
-INSERT INTO Airports (airport_name, airport_location)
-VALUES ('LaGuardia Airport', 'New York'),
-('Sydney Airport', 'Australia'),
-('Dublin Airport', 'Ireland'),
-('Malpensa Airport', 'Milan'),
-('Incheon Airport', 'Seoul'),
-('Seville Airport', 'Spain'),
-('Narita Airport', 'Tokyo');
+INSERT INTO Airports (airport_id, airport_name, airport_location)
+VALUES ('KLGA', 'LaGuardia Airport', 'New York'),
+('YSSY', 'Sydney Airport', 'Australia'),
+('EIDW', 'Dublin Airport', 'Ireland'),
+('LIMC', 'Malpensa Airport', 'Milan'),
+('RKSI', 'Incheon Airport', 'Seoul'),
+('LEZL', 'Seville Airport', 'Spain'),
+('RJAA', 'Narita Airport', 'Tokyo');
 
 INSERT INTO Ticket_Classes(class_name, upgrade_charge)
 VALUES
@@ -100,7 +100,7 @@ VALUES
 ('Premium Economy', 500),
 ('Economy', 0);
 
-INSERT INTO Flights (departing_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity)
+INSERT INTO Flights (departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity)
 VALUES
 (
     (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'LaGuardia Airport'),
@@ -144,29 +144,29 @@ VALUES
 );
 
 
-INSERT INTO Tickets (itinerary_id, flight_id, ticket_class)
+INSERT INTO Tickets (itinerary_id, flight_id, ticket_class_id)
 VALUES
 (
     (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Archer Vacation 2022'),
     (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 1),
-    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'First Class')
+    (SELECT Ticket_Classes.ticket_class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'First Class')
 ),
 (
     (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Bonnet Business Trip'),
     (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 1),
-    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Business')
+    (SELECT Ticket_Classes.ticket_class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Business')
 ),
 (
     (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Bonnet Business Trip'),
     (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 2),
-    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Business')
+    (SELECT Ticket_Classes.ticket_class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Business')
 ),
 (
     (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Buffy Family Trip'),
     (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 3),
-    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Economy')
+    (SELECT Ticket_Classes.ticket_class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Economy')
 );
 
 
-SET FOREIGN_KEY_CHECKS=1;
+SET FOREIGN_KEY_CHECKS = 1;
 SET AUTOCOMMIT = 1;
