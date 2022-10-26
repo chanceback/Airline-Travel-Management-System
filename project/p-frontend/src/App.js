@@ -8,6 +8,11 @@ import './App.css';
 
 // Import Pages
 import HomePage from './pages/HomePage';
+import PassengersPage from './pages/PassengersPage';
+import AirportPage from './pages/AirportsPage';
+import FlightsPage from './pages/FlightsPage';
+import ItinerariesPage from './pages/ItinerariesPage';
+import CreateBookingPage from './pages/CreateBookingPage';
 
 
 
@@ -25,6 +30,11 @@ function App() {
           <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="passengers" element={<PassengersPage />} />
+            <Route path="airports" element={<AirportPage />} />
+            <Route path="flights" element={<FlightsPage />} />
+            <Route path="itineraries" element={<ItinerariesPage />} />
+            <Route path="create-booking" element={<CreateBookingPage/>} />
           </Routes>
           </main>
 
