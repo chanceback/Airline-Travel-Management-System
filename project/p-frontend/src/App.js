@@ -1,6 +1,6 @@
 // Import dependencies
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Import Components, styles, media
 import Navigation from './components/Navigation';
@@ -23,9 +23,9 @@ function App() {
           <Navigation />
 
           <main>
-            <Route path="">
-              <HomePage />
-            </Route>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+          </Routes>
           </main>
 
           <footer>
