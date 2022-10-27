@@ -31,6 +31,8 @@ function CreateBookingPage() {
             </fieldset>
           <input class="btn" type="submit" id="addItinerary" value="Book" />
 	    </form> 
+        <p>The goal is for the actual form to have a dynamic list of flights that will allow you to choose as little or many as needed.</p>
+        <p>The submissio of this form will create the necessary Itinerary and tickets.</p>
         </>
     )
 };
