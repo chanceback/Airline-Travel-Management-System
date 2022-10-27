@@ -22,7 +22,7 @@ function App() {
 
           <header>
             <h1>Airline Travel Management System</h1>
-            <p>Normandy Airlines is an internation flight ...</p>
+            <p>Normandy Airlines</p>
           </header>
 
           <Navigation />
