@@ -12,11 +12,10 @@
 
 
 # pm2 helpful commands
-
-# pm2 list  --shows all instances running on servers
-# pm2 start  -- start an instance back up
-# pm2 stop -- stop an instance
-# pm2 kill -- deletes and restarts pm2  -- running this fixed a bug where I couldn't get my project to run
+    # pm2 list  --shows all instances running on servers
+    # pm2 start  -- start an instance back up
+    # pm2 stop -- stop an instance
+    # pm2 kill -- deletes and restarts pm2  -- running this fixed a bug where I couldn't get my project to run
 
 
 
