@@ -31,8 +31,8 @@ WHERE id = :passenger_idInput;
 -- -----------------------------------------------------
 
 -- ADD data to Airports table
-INSERT INTO Airports (airport_name, airport_location) 
-VALUES (:airport_nameInput, :airport_locationInput);
+INSERT INTO Airports (airport_id, airport_name, airport_location) 
+VALUES (:airport_id, :airport_nameInput, :airport_locationInput);
 
 -- DELETE data from the Airports table
 DELETE FROM Airports WHERE id = :airport_idInput;
@@ -44,7 +44,7 @@ SELECT * FROM Airports WHERE airport_name LIKE :airport_nameInput;
 SELECT * FROM Airports;
 
 -- UPDATE data in the Airports table
-UPDATE Airports SET airport_name = :airport_nameInput, airport_location = :airport_locationInput where id = :airport_idInput
+UPDATE Airports SET airport_identifier = :airport_idInput, airport_name = :airport_nameInput, airport_location = :airport_locationInput where id = :airport_idInput
 
 -- -----------------------------------------------------
 -- Flights
