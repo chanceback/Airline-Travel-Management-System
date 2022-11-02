@@ -1,186 +1,134 @@
-SET FOREIGN_KEY_CHECKS = 0;
-SET AUTOCOMMIT = 0;
+-- Query for add a new character functionality with colon : character being used to 
+-- denote the variables that will have data from the backend programming language
 
-DROP TABLE IF EXISTS Passengers;
-DROP TABLE IF EXISTS Flights;
-DROP TABLE IF EXISTS Airports;
-DROP TABLE IF EXISTS Tickets;
-DROP TABLE IF EXISTS Ticket_Classes;
-DROP TABLE IF EXISTS Itineraries;
+-- -----------------------------------------------------
+-- Passengers
+-- -----------------------------------------------------
+
+-- ADD Passengers to the Passengers table
+INSERT INTO Passengers (first_name, last_name, passport, email, phone_number) 
+VALUES (:first_nameInput, :last_nameInput, :passportInput, :emailInput, :phone_numberInput);
+
+-- DELETE Passengers from the Passengers table
+DELETE FROM Passengers WHERE passenger_id = :passenger_idInput;
+
+-- DELETE Passengers from the Itineraries
+DELETE FROM Itineraries WHERE passenger_id = :passenger_idInput;
+
+-- SELECT all the Passengers in the Passengers table
+SELECT * FROM Passengers;
+
+-- SEARCH for Passengers by last name
+SELECT * FROM Passengers WHERE last_name LIKE :last_nameInput;
+
+-- UPDATE Passengers Information 
+UPDATE Passenger 
+SET first_nameInput = :first_nameInput, last_name = :last_nameInput, passport = passportInput, email = :emailInput, phone_number = :phone_numberInput 
+WHERE id = :passenger_idInput;
+
+-- -----------------------------------------------------
+-- Airports
+-- -----------------------------------------------------
+
+-- ADD data to Airports table
+INSERT INTO Airports (airport_id, airport_name, airport_location) 
+VALUES (:airport_id, :airport_nameInput, :airport_locationInput);
+
+-- DELETE data from the Airports table
+DELETE FROM Airports WHERE id = :airport_idInput;
+
+-- SEARCH for Airports by airport name
+SELECT * FROM Airports WHERE airport_name LIKE :airport_nameInput;
+
+-- SELECT all the Airports in the Airports table
+SELECT * FROM Airports;
+
+-- UPDATE data in the Airports table
+UPDATE Airports SET airport_identifier = :airport_idInput, airport_name = :airport_nameInput, airport_location = :airport_locationInput where id = :airport_idInput
+
+-- -----------------------------------------------------
+-- Flights
+-- -----------------------------------------------------
+
+-- ADD data into Flights table
+INSERT INTO Flights (departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity) 
+VALUES (:departure_airportInput, :arrival_airportInput, :departure_timeInput, 
+:arrival_timeInput, :air_fareInput, :capacityInput);
+
+-- DELETE data from Flights table
+DELETE FROM Flights 
+WHERE id = :flight_idInput;
+
+-- SELECT all the Flights in the Flights table
+SELECT * FROM Flights;
+
+-- UPDATE Flights data
+UPDATE Flights 
+SET departure_airport = :departure_airportInput, arrival_airport = :arrival_airportInput, departure_time = :departure_airportInput, 
+arrival_time = :arrival_timeInput, air_fare = :air_fareInput, capacity = :capacityInput 
+WHERE id = flight_idInput;
+
+SELECT Flights.flight_id, departure_airport.name, arrival_airport.name FROM Flights JOIN Airports ON Airports.airport_id = Flights.flight_id;
 
 
 -- -----------------------------------------------------
--- Passengers Table
+-- Tickets
 -- -----------------------------------------------------
-CREATE TABLE Passengers(
-    passenger_id int AUTO_INCREMENT NOT NULL,
-    first_name varchar(255) NOT NULL,
-    last_name varchar(255) NOT NULL,
-    passport varchar(10) NOT NULL unique,
-    email varchar(255) NOT NULL,
-    phone_number varchar(15) NOT NULL,
-    UNIQUE (passport),
-    PRIMARY KEY (passenger_id)
-);
 
--- -----------------------------------------------------
--- Flights Table 
--- -----------------------------------------------------
-CREATE TABLE Flights(
-    flight_id int AUTO_INCREMENT NOT NULL,
-    departure_airport int NOT NULL,
-    arrival_airport int NOT NULL,
-    departure_time timestamp NOT NULL,
-    arrival_time timestamp NOT NULL,
-    air_fare int NOT NULL,
-    capacity int NOT NULL,
-    PRIMARY KEY (flight_id),
-    FOREIGN KEY (departure_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE,
-    FOREIGN KEY (arrival_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE
-);
+-- ADD
+INSERT INTO Tickets (ticket_id, itinerary_id, flight_id, ticket_class) 
+VALUES (:ticket_idInput, :itinerary_idInput, :flight_idInput, ticket_classInput);
 
--- -----------------------------------------------------
--- Airports Table 
--- -----------------------------------------------------
-CREATE TABLE Airports(
-    airport_id int AUTO_INCREMENT NOT NULL,
-    airport_name varchar(255) NOT NULL,
-    airport_location varchar(255) NOT NULL,
-    description varchar(1000) NOT NULL,
-    PRIMARY KEY (airport_id)
-);
+-- DELETE 
+DELETE FROM Tickets
+WHERE id = :ticket_idInput;
 
--- -----------------------------------------------------
--- Tickets Table 
--- -----------------------------------------------------
-CREATE TABLE Tickets(
-    ticket_id int AUTO_INCREMENT NOT NULL,
-    itinerary_id int NOT NULL,
-    flight_id int NOT NULL,
-    ticket_class int NOT NULL,
-    PRIMARY KEY (ticket_id), 
-    FOREIGN KEY (itinerary_id) REFERENCES Itineraries(itinerary_id) ON DELETE CASCADE,
-    FOREIGN KEY (flight_id) REFERENCES Flights(flight_id) ON DELETE CASCADE,
-    FOREIGN KEY (ticket_class) REFERENCES Ticket_Classes(class_id)
-);
+-- SELECT 
+SELECT * FROM Tickets;
 
--- -----------------------------------------------------
--- Ticket_Classes Table 
--- -----------------------------------------------------
-CREATE TABLE Ticket_Classes(
-    class_id int AUTO_INCREMENT NOT NULL,
-    class_name varchar(25) NOT NULL,
-    upgrade_charge int NOT NULL,
-    PRIMARY KEY (class_id)
-);
+-- UPDATE
 
--- -----------------------------------------------------
--- Itineraries Table 
--- -----------------------------------------------------
-CREATE TABLE Itineraries(
-    itinerary_id int AUTO_INCREMENT NOT NULL,
-    passenger_id int NOT NULL,
-    trip_name varchar(255) UNIQUE NOT NULL,
-    PRIMARY KEY (itinerary_id),
-    FOREIGN KEY (passenger_id) REFERENCES Passengers(passenger_id) ON DELETE CASCADE
-);
+UPDATE Tickets
+SET itinerary_id = itinerary_idInput, flight_id = flight_idInput, ticket_class = ticket_classInput
+WHERE id = ticket_idInput
 
 
 -- -----------------------------------------------------
--- Sample Data  
+-- Ticket Classes
 -- -----------------------------------------------------
-INSERT INTO Passengers (first_name, last_name, passport, email, phone_number)
-VALUES('Sterling', 'Archer', '542637785', 'archer@hello.com', '814-825-5951'),
-('Stede', 'Bonnet', '919608451', 'bonnet@hello.com', '919-252-6000'),
-('Steve', 'Harrington', '135516591', 'harrington@hello.com', '505-820-2961'),
-('Mabel', 'Mora', '637071702', 'mora@hello.com', '315-794-6533'),
-('Michael', 'Scott', '571921982', 'scott@hello.com', '716-475-1975'),
-('Buffy', 'Summers', '678996728', 'summers@hello.com', '813-273-1085'),
-('Jeff', 'Winger', '218571886', 'winger@hello.com', '408-558-2426');
 
-INSERT INTO Airports (airport_name, airport_location)
-VALUES ('LaGuardia Airport', 'New York'),
-('Sydney Airport', 'Australia'),
-('Dublin Airport', 'Ireland'),
-('Malpensa Airport', 'Milan'),
-('Incheon Airport', 'Seoul'),
-('Seville Airport', 'Spain'),
-('Narita Airport', 'Tokyo');
+-- ADD
+INSERT INTO Ticket_Classes (class_id, class_name, upgrade_charge) 
+VALUES (:class_idInput, :class_nameInput, :upgrade_chargeInput);
 
-INSERT INTO Ticket_Classes(class_name, upgrade_charge)
-VALUES
-('First Class', 5000),
-('Business', 1000), 
-('Premium Economy', 500),
-('Economy', 0);
+-- DELETE 
+DELETE FROM Ticket_Classes 
+WHERE id = :class_idInput;
 
-INSERT INTO Flights (departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity)
-VALUES
-(
-    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'LaGuardia Airport'),
-    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'Sydney Airport'),
-    '2022-10-30 08:00:00',
-    '2022-10-30 14:00:00',
-    5000,
-    70
-),
-(
-    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'Sydney Airport'),
-    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'Incheon Airport'),
-    '2022-11-01 07:00:00',
-    '2022-11-01 15:00:00',
-    5000,
-    70
-),
-(
-    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'LaGuardia Airport'),
-    (SELECT Airports.airport_id FROM Airports WHERE Airports.airport_name = 'Narita Airport'),
-    '2023-02-20 08:00:00',
-    '2023-02-21 20:00:00',
-    5000,
-    70
-);
+-- SELECT 
+SELECT * FROM Ticket_Classes;
 
+-- UPDATE 
+UPDATE Ticket_Classes
+SET class_name = :class_nameInput, upgrade_charge = upgrade_chargeInput
+WHERE id = class_idInput
 
-INSERT INTO Itineraries (passenger_id, trip_name)
-VALUES
-(
-    (SELECT Passengers.passenger_id FROM Passengers WHERE Passengers.passport = '542637785'),
-    "Archer Vacation 2022"
-),
-(
-    (SELECT Passengers.passenger_id FROM Passengers WHERE Passengers.passport = '919608451'),
-    "Bonnet Business Trip"
-),
-(
-    (SELECT Passengers.passenger_id FROM Passengers WHERE Passengers.passport = '678996728'),
-    "Buffy Family Trip"
-);
+-- -----------------------------------------------------
+-- Itineraries 
+-- -----------------------------------------------------
 
+-- ADD
+INSERT INTO Itineraries (itinerary_id, passenger_id, trip_name) 
+VALUES (:itinerary_idInput, :passenger_idInput, :trip_nameInput);
 
-INSERT INTO Tickets (itinerary_id, flight_id, ticket_class)
-VALUES
-(
-    (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Archer Vacation 2022'),
-    (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 1),
-    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'First Class')
-),
-(
-    (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Bonnet Business Trip'),
-    (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 1),
-    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Business')
-),
-(
-    (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Bonnet Business Trip'),
-    (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 2),
-    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Business')
-),
-(
-    (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.trip_name = 'Buffy Family Trip'),
-    (SELECT Flights.flight_id FROM Flights WHERE Flights.flight_id = 3),
-    (SELECT Ticket_Classes.class_id FROM Ticket_Classes WHERE Ticket_Classes.class_name = 'Economy')
-);
+-- DELETE an itinerary by trip_name
+DELETE FROM Itineraries 
+WHERE trip_name = :trip_nameInput;
 
+-- SELECT 
+SELECT * FROM Itineraries;
 
-SET FOREIGN_KEY_CHECKS=1;
-SET AUTOCOMMIT = 1;
+-- UPDATE 
+UPDATE Itineraries 
+SET passenger_id = :passenger_idInput, trip_name = trip_nameInput
+WHERE id = itinerary_idInput
