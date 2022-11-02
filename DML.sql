@@ -44,18 +44,27 @@ UPDATE `Passengers` SET `first_name`= 'Sterling' WHERE 1 = passenger_id
 INSERT INTO Airports (airport_id, airport_name, airport_location) 
 VALUES (:airport_id, :airport_nameInput, :airport_locationInput);
 
+INSERT INTO Airports (airport_name, airport_location)
+VALUES ('LaGuardia Airport', 'New York'),
+
 -- DELETE data from the Airports table
 DELETE FROM Airports WHERE id = :airport_idInput;
 
+DELETE FROM `Airports` WHERE 1 = airport_id;
+
 -- SEARCH for Airports by airport name
-SELECT * FROM Airports WHERE airport_name LIKE :airport_nameInput;
 SELECT airport_id as id, name FROM Airports WHERE airport_id = :arrival_airportInput;
+
+SELECT airport_id as id, airport_name FROM Airports;
 
 -- SELECT all the Airports in the Airports table
 SELECT * FROM Airports;
 
 -- UPDATE data in the Airports table
 UPDATE Airports SET airport_identifier = :airport_idInput, airport_name = :airport_nameInput, airport_location = :airport_locationInput where id = :airport_idInput
+
+UPDATE `Airports` SET `airport_name`= 'LGA' WHERE 1 = airport_id
+UPDATE `Airports` SET `airport_name`= 'LaGuardia Airport' WHERE 1 = airport_id
 
 -- -----------------------------------------------------
 -- Flights
@@ -79,8 +88,10 @@ SET departure_airport = :departure_airportInput, arrival_airport = :arrival_airp
 arrival_time = :arrival_timeInput, air_fare = :air_fareInput, capacity = :capacityInput 
 WHERE id = flight_idInput;
 
-SELECT Flights.flight_id, departure_airport.name, arrival_airport.name FROM Flights JOIN Airports ON Airports.airport_id = Flights.flight_id;
-
+SELECT Flights.flight_id, d_airport.airport_name as Departure, a_airport.airport_name as Arrival, Flights.departure_time, Flights.arrival_time, Flights.air_fare, Flights.capacity 
+FROM Flights 
+JOIN Airports as d_airport ON d_airport.airport_id = Flights.departure_airport 
+JOIN Airports as a_airport ON a_airport.airport_id = Flights.arrival_airport;
 
 -- -----------------------------------------------------
 -- Tickets
