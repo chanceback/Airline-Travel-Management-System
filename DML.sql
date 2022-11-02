@@ -51,23 +51,81 @@ UPDATE Airports SET airport_identifier = :airport_idInput, airport_name = :airpo
 -- -----------------------------------------------------
 
 -- ADD data into Flights table
-INSERT INTO Flights (departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity) VALUES (:departure_airportInput, :arrival_airportInput, :departure_timeInput, 
+INSERT INTO Flights (departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity) 
+VALUES (:departure_airportInput, :arrival_airportInput, :departure_timeInput, 
 :arrival_timeInput, :air_fareInput, :capacityInput);
 
 -- DELETE data from Flights table
-DELETE FROM Flights WHERE id = :flight_idInput;
+DELETE FROM Flights 
+WHERE id = :flight_idInput;
 
 -- SELECT all the Flights in the Flights table
 SELECT * FROM Flights;
 
 -- UPDATE Flights data
-UPDATE Flights SET departure_airport = :departure_airportInput, arrival_airport = :arrival_airportInput, departure_time = :departure_airportInput, 
-arrival_time = :arrival_timeInput, air_fare = :air_fareInput, capacity = :capacityInput WHERE id = flight_idInput;
+UPDATE Flights 
+SET departure_airport = :departure_airportInput, arrival_airport = :arrival_airportInput, departure_time = :departure_airportInput, 
+arrival_time = :arrival_timeInput, air_fare = :air_fareInput, capacity = :capacityInput 
+WHERE id = flight_idInput;
 
 -- -----------------------------------------------------
--- Itinerary
+-- Tickets
 -- -----------------------------------------------------
+
+-- ADD
+INSERT INTO Tickets (ticket_id, itinerary_id, flight_id, ticket_class) 
+VALUES (:ticket_idInput, :itinerary_idInput, :flight_idInput, ticket_classInput);
+
+-- DELETE 
+DELETE FROM Tickets
+WHERE id = :ticket_idInput;
+
+-- SELECT 
+SELECT * FROM Tickets;
+
+-- UPDATE
+
+UPDATE Tickets
+SET itinerary_id = itinerary_idInput, flight_id = flight_idInput, ticket_class = ticket_classInput
+WHERE id = ticket_idInput
+
+
+-- -----------------------------------------------------
+-- Ticket Classes
+-- -----------------------------------------------------
+
+-- ADD
+INSERT INTO Ticket_Classes (class_id, class_name, upgrade_charge) 
+VALUES (:class_idInput, :class_nameInput, :upgrade_chargeInput);
+
+-- DELETE 
+DELETE FROM Ticket_Classes 
+WHERE id = :class_idInput;
+
+-- SELECT 
+SELECT * FROM Ticket_Classes;
+
+-- UPDATE 
+UPDATE Ticket_Classes
+SET class_name = :class_nameInput, upgrade_charge = upgrade_chargeInput
+WHERE id = class_idInput
+
+-- -----------------------------------------------------
+-- Itineraries 
+-- -----------------------------------------------------
+
+-- ADD
+INSERT INTO Itineraries (itinerary_id, passenger_id, trip_name) 
+VALUES (:itinerary_idInput, :passenger_idInput, :trip_nameInput);
 
 -- DELETE an itinerary by trip_name
-DELETE FROM Itineraries WHERE trip_name = :trip_nameInput;
+DELETE FROM Itineraries 
+WHERE trip_name = :trip_nameInput;
 
+-- SELECT 
+SELECT * FROM Itineraries;
+
+-- UPDATE 
+UPDATE Itineraries 
+SET passenger_id = :passenger_idInput, trip_name = trip_nameInput
+WHERE id = itinerary_idInput
