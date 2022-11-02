@@ -49,16 +49,15 @@ VALUES ('LaGuardia Airport', 'New York'),
 
 -- DELETE data from the Airports table
 DELETE FROM Airports WHERE id = :airport_idInput;
-
 DELETE FROM `Airports` WHERE 1 = airport_id;
 
 -- SEARCH for Airports by airport name
 SELECT airport_id as id, name FROM Airports WHERE airport_id = :arrival_airportInput;
-
 SELECT airport_id as id, airport_name FROM Airports;
 
 -- SELECT all the Airports in the Airports table
 SELECT * FROM Airports;
+SELECT airport_name FROM Airports;
 
 -- UPDATE data in the Airports table
 UPDATE Airports SET airport_identifier = :airport_idInput, airport_name = :airport_nameInput, airport_location = :airport_locationInput where id = :airport_idInput
@@ -130,10 +129,13 @@ WHERE id = :class_idInput;
 -- SELECT 
 SELECT * FROM Ticket_Classes;
 
+SELECT Ticket_Classes.class_name FROM Ticket_Classes;
+
 -- UPDATE 
 UPDATE Ticket_Classes
 SET class_name = :class_nameInput, upgrade_charge = upgrade_chargeInput
 WHERE id = class_idInput
+
 
 -- -----------------------------------------------------
 -- Itineraries 
@@ -149,8 +151,14 @@ WHERE trip_name = :trip_nameInput;
 
 -- SELECT 
 SELECT * FROM Itineraries;
+SELECT trip_name FROM Itineraries;
 
 -- UPDATE 
 UPDATE Itineraries 
 SET passenger_id = :passenger_idInput, trip_name = trip_nameInput
 WHERE id = itinerary_idInput
+
+SELECT Itineraries.itinerary_id, Passengers.first_name, Passengers.last_name, Passengers.passport, Itineraries.trip_name 
+FROM Itineraries 
+JOIN Passengers 
+ON Passengers.passenger_id = Itineraries.passenger_id;
