@@ -5,26 +5,36 @@
 -- Passengers
 -- -----------------------------------------------------
 
--- ADD Passengers to the Passengers table
+-- ADD Passengers data to the Passengers table
 INSERT INTO Passengers (first_name, last_name, passport, email, phone_number) 
 VALUES (:first_nameInput, :last_nameInput, :passportInput, :emailInput, :phone_numberInput);
+-- example of how to add passenger data
+INSERT INTO Passengers (first_name, last_name, passport, email, phone_number)
+VALUES('Sterling', 'Archer', '542637785', 'archer@hello.com', '814-825-5951')
 
--- DELETE Passengers from the Passengers table
-DELETE FROM Passengers WHERE passenger_id = :passenger_idInput;
-
--- DELETE Passengers from the Itineraries
-DELETE FROM Itineraries WHERE passenger_id = :passenger_idInput;
+-- DELETE Passengers data from the Passengers table
+DELETE FROM 'Passengers' WHERE passenger_id = :passenger_idInput;
+-- example of how to delete passenger data
+DELETE FROM `Passengers` WHERE 1 = passenger_id;
 
 -- SELECT all the Passengers in the Passengers table
-SELECT * FROM Passengers;
+SELECT passenger_id FROM Passengers;
 
--- SEARCH for Passengers by last name
-SELECT * FROM Passengers WHERE last_name LIKE :last_nameInput;
+-- SEARCH...
+SELECT passenger_id as id, first_name FROM Passengers;
+SELECT passenger_id as id, last_name FROM Passengers;
+SELECT passenger_id as id, passport FROM Passengers;
+SELECT passenger_id as id, email FROM Passengers;
+SELECT passenger_id as id, phone_number FROM Passengers;
 
 -- UPDATE Passengers Information 
-UPDATE Passenger 
-SET first_nameInput = :first_nameInput, last_name = :last_nameInput, passport = passportInput, email = :emailInput, phone_number = :phone_numberInput 
+UPDATE 'Passengers'
+SET 'passenger_id' = :passenger_idInput, first_name = :first_nameInput, last_name = :last_nameInput, passport = passportInput, email = :emailInput, phone_number = :phone_numberInput 
 WHERE id = :passenger_idInput;
+-- example of how to update passenger data
+UPDATE `Passengers` SET `first_name`= 'Mallory' WHERE 1 = passenger_id
+UPDATE `Passengers` SET `first_name`= 'Sterling' WHERE 1 = passenger_id
+
 
 -- -----------------------------------------------------
 -- Airports
@@ -39,6 +49,7 @@ DELETE FROM Airports WHERE id = :airport_idInput;
 
 -- SEARCH for Airports by airport name
 SELECT * FROM Airports WHERE airport_name LIKE :airport_nameInput;
+SELECT airport_id as id, name FROM Airports WHERE airport_id = :arrival_airportInput;
 
 -- SELECT all the Airports in the Airports table
 SELECT * FROM Airports;
