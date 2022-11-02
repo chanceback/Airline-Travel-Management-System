@@ -19,7 +19,7 @@ body {                     /* Can alternatively define in html {} or :root {} */
   background-color:#E3E8E9;
   font-family: 'Ubuntu', sans-serif;
   font-size: 18px;
-  max-width: 960px;
+  max-width: 1200px;
   margin: auto;
   padding: auto;
 }

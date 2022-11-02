@@ -11,6 +11,9 @@ function Navigation() {
         <Link to="flights">Flights</Link>
         <Link to="itineraries">Itineraries</Link>
         <Link to="create-booking">Create Booking</Link>
+        <Link to="ticket-classes">Ticket Classes</Link>
+        <Link to="Tickets">Tickets</Link>
+
     </nav>
   );
 }

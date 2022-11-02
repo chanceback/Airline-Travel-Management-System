@@ -13,7 +13,8 @@ import AirportPage from './pages/AirportsPage';
 import FlightsPage from './pages/FlightsPage';
 import ItinerariesPage from './pages/ItinerariesPage';
 import CreateBookingPage from './pages/CreateBookingPage';
-
+import TicketsPage from './pages/TicketsPage';
+import TicketClassesPage from './pages/TicketClassesPage';
 
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
             <Route path="flights" element={<FlightsPage />} />
             <Route path="itineraries" element={<ItinerariesPage />} />
             <Route path="create-booking" element={<CreateBookingPage/>} />
+            <Route path="tickets" element={<TicketsPage />} />
+            <Route path="ticket-classes" element={<TicketClassesPage />} />
           </Routes>
           </main>
 

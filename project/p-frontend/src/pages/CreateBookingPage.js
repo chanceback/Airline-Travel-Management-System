@@ -3,8 +3,9 @@ import React from "react";
 function CreateBookingPage() {
     return(
         <>
+        <h1>Book Trip</h1>
+        <p>Fill out the following form and the appropriate Itinerary/Tickets will be generated for the given Passenger based on your input.</p>
         <form method="POST">
-        <legend><strong>Book Trip</strong></legend>
             <fieldset class="fields">
                 <label> first name </label> <input type="text" name="fname" />
                 <label> last name </label> <input type="text" name="lname" />
@@ -28,11 +29,18 @@ function CreateBookingPage() {
                     <option value="1KLGA">Flight ID 2</option>
                     <option value="LEZL">Flight ID 3</option>
                 </select> 
+                <label> Choose Ticket Class</label> <select name="flight_n">
+                    <option value="null">select</option>
+                    <option value="4">Economy</option>
+                    <option value="3">Premium Economy</option>
+                    <option value="2">Business</option>
+                    <option value="1">First Class</option>
+                </select> 
             </fieldset>
           <input class="btn" type="submit" id="addItinerary" value="Book" />
 	    </form> 
-        <p>The goal is for the actual form to have a dynamic list of flights that will allow you to choose as little or many as needed.</p>
-        <p>The submissio of this form will create the necessary Itinerary and tickets.</p>
+        <p>The goal is for the actual form to have a dynamic list of Flights that will allow you to choose as little or many as needed.</p>
+        <p>The submission of this form acts as the INSERT for Tickets and Itineraries</p>
         </>
     )
 };

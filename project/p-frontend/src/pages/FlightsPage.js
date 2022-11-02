@@ -3,12 +3,13 @@ import React from "react";
 function FlightsPage() {
     return(
         <>
+        <h1>Flights</h1>
         <table>
         <thead>
         <tr>
             <th>flight_id</th>
-            <th>departure_airport</th>
-            <th>arrival_airport</th>
+            <th>Departure</th>
+            <th>Arrival</th>
             <th>departure_time</th>
             <th>arrival_time</th>
             <th>air_fare</th>
@@ -20,42 +21,42 @@ function FlightsPage() {
         <tbody>
         <tr>
             <td>1</td>
-            <td>KLGA</td>
-            <td>YSSY</td>
+            <td>LaGuardia Airport</td>
+            <td>Sydney Airport</td>
             <td>2022-10-30 08:00:00</td>
             <td>2022-10-30 14:00:00</td>
             <td>5000</td>
             <td>70</td>
-            <td></td>
-            <td></td>
+            <td><button>edit</button></td>
+            <td><button>delete</button></td>
         </tr>
         <tr>
             <td>2</td>
-            <td>YSSY</td>
-            <td>RKSI</td>
+            <td>Sydney Airport</td>
+            <td>Incheon Airport</td>
             <td>2022-11-01 07:00:00</td>
             <td>2022-11-01 15:00:00</td>
             <td>5000</td>
             <td>70</td>
-            <td></td>
-            <td></td>
+            <td><button>edit</button></td>
+            <td><button>delete</button></td>
         </tr>
         <tr>
             <td>3</td>
-            <td>KLGA</td>
-            <td>RJAA</td>
+            <td>LaGuardia Airport</td>
+            <td>Narita Airport</td>
             <td>2023-02-20 08:00:00</td>
             <td>2023-02-21 20:00:00</td>
             <td>5000</td>
             <td>70</td>
-            <td></td>
-            <td></td>
+            <td><button>edit</button></td>
+            <td><button>delete</button></td>
         </tr>
         </tbody>
         </table>
 
         <form method="POST">
-        <legend><strong>Add Flight</strong></legend>
+        <legend><strong>Add New Flight to Table</strong></legend>
             <fieldset class="fields">
                 <label> departure airport </label> <select name="departure_airport">
                     <option value="null">select</option>

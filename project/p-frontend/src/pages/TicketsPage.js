@@ -3,6 +3,7 @@ import React from "react";
 function TicketsPage() {
     return(
         <>
+        <h1>Tickets</h1>
         <table>
         <thead>
         <tr>

@@ -3,6 +3,7 @@ import React from "react";
 function HomePage() {
     return(
         <>
+        <h1>Home</h1>
         <p>
             Normandy Airlines is a national airline headquartered in New York City that primarily focuses on providing 
             affordable international flights to passengers located on the east coast. With hubs located at the John F. 
