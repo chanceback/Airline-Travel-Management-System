@@ -2,12 +2,9 @@ import React from 'react';
 import PassengersTable from '../components/tables/PassengersTable';
 import CreatePassenger from '../components/forms/CreatePassenger';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../API';
 
 function PassengersPage() {
-    // Use the navigate for updating
-    const navigate = useNavigate();
 
     // Use state to bring in the data
     const [passengers, setPassengers] = useState([]);
@@ -19,8 +16,21 @@ function PassengersPage() {
         setPassengers(passengers);
     } 
 
+    
 
-    // LOAD the movies
+    // DELETE a Passenger
+    const onDeletePassenger = async id => {
+        const response = await fetch(`${API_URL}/passengers/${id}`, { method: 'DELETE' });
+        if (response.status === 204) {
+            const getResponse = await fetch(`${API_URL}/passengers`);
+            const passengers = await getResponse.json();
+            setPassengers(passengers);
+        } else {
+            console.error(`Failed to delete exercise with id = ${id}, status code = ${response.status}`)
+        }
+    }
+
+    // LOAD the Passengers
     useEffect(() => {
         loadPassengers();
     }, []);
@@ -39,10 +49,10 @@ function PassengersPage() {
             <PassengersTable
                     passengers={passengers} 
                     onEdit={null} 
-                    onDelete={null} 
+                    onDelete={onDeletePassenger} 
                 />
 
-            <CreatePassenger />
+            <CreatePassenger setPassengers={setPassengers} />
 
 
 

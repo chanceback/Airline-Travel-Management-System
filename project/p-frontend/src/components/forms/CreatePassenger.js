@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { API_URL } from '../../API';
-import Axios from 'axios';
 
-function CreatePassenger() {
+function CreatePassenger({setPassengers}) {
+
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [passport, setPassport] = useState('')
@@ -19,7 +19,11 @@ function CreatePassenger() {
             }
         });
         if(response.status === 201){
+            const getResponse = await fetch(`${API_URL}/passengers`);
+            const passengers = await getResponse.json();
             alert("Successfully added the passenger!")
+            setPassengers(passengers) 
+
         } else {
             alert(`Failed to add exercise, status code = ${response.status}`)
         };

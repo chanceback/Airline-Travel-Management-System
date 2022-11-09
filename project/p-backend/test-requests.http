@@ -1,10 +1,16 @@
+
+
+
+
+
 POST http://flip3.engr.oregonstate.edu:11785/passengers/add HTTP/1.1
 content-type: application/json
 
 {
-    "firstName": "Test", 
-    "lastName": "Tester", 
-    "passport": "637071711", 
-    "email": "test@gmail.com", 
-    "phoneNumber":"318-234-3554"
+    "firstName": "John", 
+    "lastName": "Smith", 
+    "passport": "637011711", 
+    "email": "tester@gmail.com", 
+    "phoneNumber":"318-234-3522"
 }
+

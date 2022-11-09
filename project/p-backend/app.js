@@ -101,7 +101,20 @@ app.get('/tickets', (req, res) => {
 
 // DELETE controller *********************************************************
 // DELETE Passenger
-app.post
+app.delete('/passengers/:id', (req, res) => {
+    const id = req.params.id
+    const sqlDelete = "DELETE FROM Passengers WHERE passenger_id = ?"
+    db.query(sqlDelete, id, (err, result) => {
+
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(204)
+        }
+    })
+})
 
 
 /*
