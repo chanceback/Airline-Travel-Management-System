@@ -1,5 +1,5 @@
 // Import dependencies
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Import Components, styles, media
@@ -15,9 +15,12 @@ import ItinerariesPage from './pages/ItinerariesPage';
 import CreateBookingPage from './pages/CreateBookingPage';
 import TicketsPage from './pages/TicketsPage';
 import TicketClassesPage from './pages/TicketClassesPage';
+import UpdatePassengerPage from './pages/UpdatePassengerPage';
+import CreatePassengerPage from './pages/CreatePassengerPage';
 
 
 function App() {
+  const [passengerToUpdate, setPassengerToUpdate] = useState([])
 
   return (
     <Router>
@@ -32,7 +35,9 @@ function App() {
           <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="passengers" element={<PassengersPage />} />
+            <Route path="passengers" element={<PassengersPage setPassengerToUpdate={setPassengerToUpdate} />} />
+            <Route path="passengers-edit" element={<UpdatePassengerPage passenger={passengerToUpdate} />} />
+            <Route path="passengers-add" element={<CreatePassengerPage />} />
             <Route path="airports" element={<AirportPage />} />
             <Route path="flights" element={<FlightsPage />} />
             <Route path="itineraries" element={<ItinerariesPage />} />

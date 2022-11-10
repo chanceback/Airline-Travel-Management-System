@@ -1,11 +1,12 @@
 import React from 'react';
 import PassengersTable from '../components/tables/PassengersTable';
-import CreatePassenger from '../components/forms/CreatePassenger';
 import { useState, useEffect } from 'react';
 import { API_URL } from '../API';
-import UpdatePassenger from '../components/forms/UpdatePassenger';
+import { useNavigate } from 'react-router-dom';
 
-function PassengersPage() {
+function PassengersPage({ setPassengerToUpdate }) {
+    // Use navigate for updating
+    const navigate = useNavigate()
 
     // Use state to bring in the data
     const [passengers, setPassengers] = useState([]);
@@ -18,24 +19,15 @@ function PassengersPage() {
     } 
 
     // UPDATE a Passenger
-    const [passengerToUpdate, setPassengerToUpdate] = useState([])
-    const dummyPassenger = {
-        passenger_id : null,
-        first_name : null,
-        last_name: null,
-        passport: null,
-        email: null,
-        phone_number: null
-
-    }
-    const onEditPassenger = passenger => {
-        setPassengerToUpdate(passenger);
-        toggleVisible()
-        // similar to how when it opens a new page. It takes the passenger, then renders the form with passenger info. that should be goal
+    const onEditPassenger = async passenger => {
+        setPassengerToUpdate(passenger)
+        navigate('../passengers-edit')
     }
 
-    const [isVisible, setIsVisible] = useState(false)
-    const toggleVisible = () => { setIsVisible(!isVisible) }
+    // CREATE a Passenger
+    const navigateToCreate = () => {
+        navigate('../passengers-add')
+    }
 
 
     // DELETE a Passenger
@@ -55,6 +47,8 @@ function PassengersPage() {
         loadPassengers();
     }, []);
 
+
+
     return(
         <>
         <h1>Passengers</h1>
@@ -72,15 +66,7 @@ function PassengersPage() {
                     onDelete={onDeletePassenger} 
                 />
 
-            <CreatePassenger setPassengers={setPassengers} />
-
-            {isVisible
-                ? <UpdatePassenger passenger={passengerToUpdate} setPassengers={setPassengers} />
-                : <></>
-            }
-
-
-
+            <button onClick={navigateToCreate}>Create New Passenger</button>
         
         </>
     )

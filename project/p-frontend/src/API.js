@@ -1,1 +1,1 @@
-export const API_URL = "http://flip3.engr.oregonstate.edu:11785";
+export const API_URL = "http://flip2.engr.oregonstate.edu:11785";
