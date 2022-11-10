@@ -53,11 +53,16 @@ function PassengersPage({ setPassengerToUpdate }) {
         <>
         <h1>Passengers</h1>
 
-            <form method="GET">
+            <form onSubmit={(e) => { e.preventDefault();}}>
                 <fieldset>
                     <label>Lookup Passenger by Passport #</label><input type="text" name="search_passenger" />
+                    <label for="submit">
+                    <button
+                        type="submit"
+                        id="submit"
+                    >Search</button>
+                    </label>
                 </fieldset>
-                <button>Search</button>
             </form>
 
             <PassengersTable
