@@ -2,6 +2,7 @@ import React from 'react';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 // Needs to receive a JSON from a fetch in Passengers page
 function PassengersTable({ passengers, onEdit, onDelete }) {
+
     return (
         <table id="passengers">
             <caption>Current Passengers</caption>

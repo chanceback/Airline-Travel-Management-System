@@ -39,10 +39,6 @@ app.post('/passengers/add', (req, res) => {
             res.sendStatus(201)
         }
     })
-    
-
-    
-    
 })
 
 // RETRIEVE controller *******************************************************
@@ -96,7 +92,27 @@ app.get('/tickets', (req, res) => {
 
 
 // UPDATE controller *********************************************************
-
+// UPDATE Passenger
+app.put('/passengers/:id', (req, res) => {
+    const id = req.params.id
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+    const passport = req.body.passport
+    const email = req.body.email
+    const phoneNumber = req.body.phoneNumber
+    const sqlUpdate = 
+        "UPDATE Passengers SET first_name = ?, last_name = ?, passport = ?, email = ?, phone_number = ? WHERE passenger_id = ?"
+    
+    db.query(sqlUpdate, [firstName, lastName, passport, email, phoneNumber, id], (err, result) => {
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(200)
+        }
+    })
+})
 
 
 // DELETE controller *********************************************************

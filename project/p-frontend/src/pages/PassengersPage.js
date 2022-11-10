@@ -3,6 +3,7 @@ import PassengersTable from '../components/tables/PassengersTable';
 import CreatePassenger from '../components/forms/CreatePassenger';
 import { useState, useEffect } from 'react';
 import { API_URL } from '../API';
+import UpdatePassenger from '../components/forms/UpdatePassenger';
 
 function PassengersPage() {
 
@@ -16,7 +17,26 @@ function PassengersPage() {
         setPassengers(passengers);
     } 
 
-    
+    // UPDATE a Passenger
+    const [passengerToUpdate, setPassengerToUpdate] = useState([])
+    const dummyPassenger = {
+        passenger_id : null,
+        first_name : null,
+        last_name: null,
+        passport: null,
+        email: null,
+        phone_number: null
+
+    }
+    const onEditPassenger = passenger => {
+        setPassengerToUpdate(passenger);
+        toggleVisible()
+        // similar to how when it opens a new page. It takes the passenger, then renders the form with passenger info. that should be goal
+    }
+
+    const [isVisible, setIsVisible] = useState(false)
+    const toggleVisible = () => { setIsVisible(!isVisible) }
+
 
     // DELETE a Passenger
     const onDeletePassenger = async id => {
@@ -26,7 +46,7 @@ function PassengersPage() {
             const passengers = await getResponse.json();
             setPassengers(passengers);
         } else {
-            console.error(`Failed to delete exercise with id = ${id}, status code = ${response.status}`)
+            console.error(`Failed to delete passenger with id = ${id}, status code = ${response.status}`)
         }
     }
 
@@ -48,11 +68,16 @@ function PassengersPage() {
 
             <PassengersTable
                     passengers={passengers} 
-                    onEdit={null} 
+                    onEdit={onEditPassenger} 
                     onDelete={onDeletePassenger} 
                 />
 
             <CreatePassenger setPassengers={setPassengers} />
+
+            {isVisible
+                ? <UpdatePassenger passenger={passengerToUpdate} setPassengers={setPassengers} />
+                : <></>
+            }
 
 
 
