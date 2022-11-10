@@ -37,6 +37,7 @@ function UpdatePassengerPage({ passenger }){
         <h1>Edit a Passengers Information</h1>
         <form onSubmit={(e) => { e.preventDefault();}}>
                 <fieldset>
+                    <legend>Passenger ID: {passenger.passenger_id}</legend>
                     <label for="firstName">First Name</label>
                     <input
                         type="text"
