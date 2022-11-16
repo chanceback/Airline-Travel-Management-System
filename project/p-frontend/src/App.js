@@ -9,18 +9,21 @@ import './App.css';
 // Import Pages
 import HomePage from './pages/HomePage';
 import PassengersPage from './pages/PassengersPage';
-import AirportPage from './pages/AirportsPage';
+import CreatePassengerPage from './pages/CreatePassengerPage';
+import AirportsPage from './pages/AirportsPage';
+import CreateAirportsPage from './pages/CreateAirportsPage';
 import FlightsPage from './pages/FlightsPage';
 import ItinerariesPage from './pages/ItinerariesPage';
 import CreateBookingPage from './pages/CreateBookingPage';
 import TicketsPage from './pages/TicketsPage';
 import TicketClassesPage from './pages/TicketClassesPage';
+import UpdateAirportsPage from './pages/UpdateAirportsPage';
 import UpdatePassengerPage from './pages/UpdatePassengerPage';
-import CreatePassengerPage from './pages/CreatePassengerPage';
 
 
 function App() {
   const [passengerToUpdate, setPassengerToUpdate] = useState([])
+  const [airportToUpdate, setAirportToUpdate] = useState([])
 
   return (
     <Router>
@@ -36,9 +39,13 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="passengers" element={<PassengersPage setPassengerToUpdate={setPassengerToUpdate} />} />
-            <Route path="passengers-edit" element={<UpdatePassengerPage passenger={passengerToUpdate} />} />
             <Route path="passengers-add" element={<CreatePassengerPage />} />
-            <Route path="airports" element={<AirportPage />} />
+            <Route path="passengers-edit" element={<UpdatePassengerPage passenger={passengerToUpdate} />} />
+
+            <Route path="airports" element={<AirportsPage setAirportToUpdate={setAirportToUpdate} />} />
+            <Route path="airports-add" element={<CreateAirportsPage />} />
+            <Route path="airports-edit" element={<UpdateAirportsPage airport={airportToUpdate} />} />
+  
             <Route path="flights" element={<FlightsPage />} />
             <Route path="itineraries" element={<ItinerariesPage />} />
             <Route path="create-booking" element={<CreateBookingPage/>} />

@@ -1,94 +1,62 @@
-import React from "react";
+import React from 'react';
+import AirportsTable from '../components/tables/AirportsTable';
+import { useState, useEffect } from 'react';
+import { API_URL } from '../API';
+import { useNavigate } from 'react-router-dom';
 
-function AirportPage() {
+function AirportsPage({ setAirportToUpdate }) {
+    // Use navigate for updating
+    const navigate = useNavigate()
+
+    // Use state to bring in the data
+    const [airports, setAirports] = useState([]);
+    
+    // RETRIEVE the list of airports
+    const loadAirports = async () => {
+        const response = await fetch(`${API_URL}/airports`);
+        const airports = await response.json();
+        setAirports(airports);
+    } 
+
+    // UPDATE Airport
+    const onEditAirport = async airport => {
+        setAirportToUpdate(airport)
+        navigate('../airports-edit')
+    }
+
+    // CREATE Airport
+    const navigateToCreate = () => {
+        navigate('../airports-add')
+    }
+
+    // DELETE Airport
+    const onDeleteAirport = async id => {
+        const response = await fetch(`${API_URL}/airports/${id}`, { method: 'DELETE' });
+        if (response.status === 204) {
+            const getResponse = await fetch(`${API_URL}/airports`);
+            const airports = await getResponse.json();
+            setAirports(airports);
+        } else {
+            console.error(`Failed to delete airport with id = ${id}, status code = ${response.status}`)
+        }
+    }
+
+    // LOAD Airports
+    useEffect(() => {
+        loadAirports();
+    }, []);
+
     return(
         <>
         <h1>Airports</h1>
-        <table>
-        <thead>
-        <tr>
-            <th>airport_id</th>
-            <th>airport_name</th>
-            <th>airport_location</th>
-            <th>description...</th>
-            <th>edit</th>
-            <th>delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>EIDW</td>
-            <td>Dublin Airport</td>
-            <td>Ireland</td>
-            <td>description...</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>KLGA</td>
-            <td>LaGuardia Airport</td>
-            <td>New York</td>
-            <td>description...</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>LEZL</td>
-            <td>Seville Airport</td>
-            <td>Spain</td>
-            <td>description...</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>LIMC</td>
-            <td>Malpensa Airport</td>
-            <td>Milan</td>
-            <td>description...</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>RJAA</td>
-            <td>Narita Airport</td>
-            <td>Tokyo</td>
-            <td>description...</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>RKSI</td>
-            <td>Incheon Airport</td>
-            <td>Seoul</td>
-            <td>description...</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>YSSY</td>
-            <td>Sydney Airport</td>
-            <td>Australia</td>
-            <td>description...</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        </tbody>
-        </table>
-
-        
-        <form method="POST">
-        <legend><strong>Add New Airport to Table</strong></legend>
-            <fieldset class="fields">
-                <label> airport identifier </label> <input type="text" name="airport_id" />
-                <label> airport name </label> <input type="text" name="airport_name" />
-                <label> airport location </label> <input type="text" name="airport_location" />
-                <label> description </label> <input type="text" name="description" />    
-            </fieldset>
-          <input class="btn" type="submit" id="addAirport" value="Add" />
-	    </form> 
-
+            <AirportsTable
+                    airports={airports} 
+                    onEdit={onEditAirport} 
+                    onDelete={onDeleteAirport} 
+                />
+            <button onClick={navigateToCreate}>Create New Airport</button>
         </>
     )
 };
 
-export default AirportPage;
+export default AirportsPage;

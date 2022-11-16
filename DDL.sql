@@ -24,6 +24,17 @@ CREATE TABLE Passengers(
 );
 
 -- -----------------------------------------------------
+-- Airports Table 
+-- -----------------------------------------------------
+CREATE TABLE Airports(
+    airport_id int AUTO_INCREMENT NOT NULL,
+    airport_name varchar(255) NOT NULL,
+    airport_location varchar(255) NOT NULL,
+    description varchar(1000) NOT NULL,
+    PRIMARY KEY (airport_id)
+);
+
+-- -----------------------------------------------------
 -- Flights Table 
 -- -----------------------------------------------------
 CREATE TABLE Flights(
@@ -40,14 +51,24 @@ CREATE TABLE Flights(
 );
 
 -- -----------------------------------------------------
--- Airports Table 
+-- Itineraries Table 
 -- -----------------------------------------------------
-CREATE TABLE Airports(
-    airport_id int AUTO_INCREMENT NOT NULL,
-    airport_name varchar(255) NOT NULL,
-    airport_location varchar(255) NOT NULL,
-    description varchar(1000) NOT NULL,
-    PRIMARY KEY (airport_id)
+CREATE TABLE Itineraries(
+    itinerary_id int AUTO_INCREMENT NOT NULL,
+    passenger_id int NOT NULL,
+    trip_name varchar(255) UNIQUE NOT NULL,
+    PRIMARY KEY (itinerary_id),
+    FOREIGN KEY (passenger_id) REFERENCES Passengers(passenger_id) ON DELETE CASCADE
+);
+
+-- -----------------------------------------------------
+-- Ticket_Classes Table 
+-- -----------------------------------------------------
+CREATE TABLE Ticket_Classes(
+    class_id int AUTO_INCREMENT NOT NULL,
+    class_name varchar(25) NOT NULL,
+    upgrade_charge int NOT NULL,
+    PRIMARY KEY (class_id)
 );
 
 -- -----------------------------------------------------
@@ -62,27 +83,6 @@ CREATE TABLE Tickets(
     FOREIGN KEY (itinerary_id) REFERENCES Itineraries(itinerary_id) ON DELETE CASCADE,
     FOREIGN KEY (flight_id) REFERENCES Flights(flight_id) ON DELETE CASCADE,
     FOREIGN KEY (ticket_class) REFERENCES Ticket_Classes(class_id)
-);
-
--- -----------------------------------------------------
--- Ticket_Classes Table 
--- -----------------------------------------------------
-CREATE TABLE Ticket_Classes(
-    class_id int AUTO_INCREMENT NOT NULL,
-    class_name varchar(25) NOT NULL,
-    upgrade_charge int NOT NULL,
-    PRIMARY KEY (class_id)
-);
-
--- -----------------------------------------------------
--- Itineraries Table 
--- -----------------------------------------------------
-CREATE TABLE Itineraries(
-    itinerary_id int AUTO_INCREMENT NOT NULL,
-    passenger_id int NOT NULL,
-    trip_name varchar(255) UNIQUE NOT NULL,
-    PRIMARY KEY (itinerary_id),
-    FOREIGN KEY (passenger_id) REFERENCES Passengers(passenger_id) ON DELETE CASCADE
 );
 
 
