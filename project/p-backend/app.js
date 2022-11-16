@@ -41,6 +41,25 @@ app.post('/passengers/add', (req, res) => {
     })
 })
 
+// Add New Passenger
+app.post('/airports/add', (req, res) => {
+    const airport_id = req.body.airport_id
+    const airport_name = req.body.airport_name
+    const airport_location = req.body.airport_location
+
+    const sql_insert = 
+        'INSERT INTO Airports (airport_id, airport_name, airport_location) VALUES (?,?,?)'
+
+    db.query(sql_insert, [airport_id, airport_name, airport_location], (err, result) => {
+        if (err) {
+            console.log(err)
+            res.sendStatus(400)
+        } else{
+            res.sendStatus(201)
+        }
+    })
+})
+
 // RETRIEVE controller *******************************************************
 // Get Passengers
 app.get('/passengers', (req, res) => {
@@ -114,6 +133,24 @@ app.put('/passengers/:id', (req, res) => {
     })
 })
 
+// UPDATE Airport
+app.put('/airports/:id', (req, res) => {
+    const id = req.params.id
+    const airport_name = req.body.airport_name
+    const airport_location = req.body.airport_location
+    const sqlUpdate = 
+        "UPDATE Airports SET airport_name = ?, airport_location = ? WHERE airport_id = ?"
+    
+    db.query(sqlUpdate, [airport_name, airport_location, id], (err, result) => {
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(200)
+        }
+    })
+})
 
 // DELETE controller *********************************************************
 // DELETE Passenger

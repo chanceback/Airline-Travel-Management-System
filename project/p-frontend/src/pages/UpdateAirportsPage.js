@@ -3,7 +3,6 @@ import { API_URL } from "../API";
 import { useNavigate } from 'react-router-dom';
 
 function UpdateAirportsPage({ airport }){
-    const [airport_id, setAirport_id] = useState(airport.airport_id)
     const [airport_name, setAirport_name] = useState(airport.airport_name)
     const [airport_location, setAirport_location] = useState(airport.airport_location)
 
@@ -13,7 +12,6 @@ function UpdateAirportsPage({ airport }){
         const response = await fetch(`${API_URL}/airports/${airport.airport_id}`, {
             method: 'PUT',
             body: JSON.stringify({ 
-                airport_id: airport_id,
                 airport_name: airport_name,
                 airport_location: airport_location
             }),
@@ -33,14 +31,7 @@ function UpdateAirportsPage({ airport }){
         <h1>Edit an Airports Information</h1>
         <form onSubmit={(e) => { e.preventDefault();}}>
                 <fieldset>
-                    <legend>Airport ID: {airport.airport}</legend>
-                    <label for="airport_id">Airport ID</label>
-                    <input
-                        type="text"
-                        value={airport_id}
-                        onChange={e => setAirport_id(e.target.value)} 
-                        id="airport_id" />
-                    
+                    <legend>Airport ID: {airport.airport_id}</legend>
                     <label for="airport_name">Airport Name</label>
                     <input
                         type="text"
