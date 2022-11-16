@@ -1,12 +1,12 @@
 SET FOREIGN_KEY_CHECKS = 0;
 SET AUTOCOMMIT = 0;
 
-DROP TABLE IF EXISTS Passengers;
-DROP TABLE IF EXISTS Flights;
-DROP TABLE IF EXISTS Airports;
 DROP TABLE IF EXISTS Tickets;
 DROP TABLE IF EXISTS Ticket_Classes;
 DROP TABLE IF EXISTS Itineraries;
+DROP TABLE IF EXISTS Flights;
+DROP TABLE IF EXISTS Airports;
+DROP TABLE IF EXISTS Passengers;
 
 
 -- -----------------------------------------------------
