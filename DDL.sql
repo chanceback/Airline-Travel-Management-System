@@ -27,10 +27,9 @@ CREATE TABLE Passengers(
 -- Airports Table 
 -- -----------------------------------------------------
 CREATE TABLE Airports(
-    airport_id int AUTO_INCREMENT NOT NULL,
+    airport_id varchar(4) UNIQUE NOT NULL,
     airport_name varchar(255) NOT NULL,
     airport_location varchar(255) NOT NULL,
-    description varchar(1000) NOT NULL,
     PRIMARY KEY (airport_id)
 );
 
@@ -98,14 +97,14 @@ VALUES('Sterling', 'Archer', '542637785', 'archer@hello.com', '814-825-5951'),
 ('Buffy', 'Summers', '678996728', 'summers@hello.com', '813-273-1085'),
 ('Jeff', 'Winger', '218571886', 'winger@hello.com', '408-558-2426');
 
-INSERT INTO Airports (airport_name, airport_location)
-VALUES ('LaGuardia Airport', 'New York'),
-('Sydney Airport', 'Australia'),
-('Dublin Airport', 'Ireland'),
-('Malpensa Airport', 'Milan'),
-('Incheon Airport', 'Seoul'),
-('Seville Airport', 'Spain'),
-('Narita Airport', 'Tokyo');
+INSERT INTO Airports (airport_id, airport_name, airport_location)
+VALUES ('KLGA', 'LaGuardia Airport', 'New York'),
+('YSSY', 'Sydney Airport', 'Australia'),
+('EIDW', 'Dublin Airport', 'Ireland'),
+('LIMC', 'Malpensa Airport', 'Milan'),
+('RKSI', 'Incheon Airport', 'Seoul'),
+('LEZL', 'Seville Airport', 'Spain'),
+('RJAA', 'Narita Airport', 'Tokyo');
 
 INSERT INTO Ticket_Classes(class_name, upgrade_charge)
 VALUES
