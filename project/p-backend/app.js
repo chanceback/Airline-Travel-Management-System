@@ -41,7 +41,7 @@ app.post('/passengers/add', (req, res) => {
     })
 })
 
-// Add New Passenger
+// Add New Airport
 app.post('/airports/add', (req, res) => {
     const airport_id = req.body.airport_id
     const airport_name = req.body.airport_name
@@ -57,6 +57,25 @@ app.post('/airports/add', (req, res) => {
         } else{
             res.sendStatus(201)
         }
+    })
+})
+
+// Add New Ticket Class
+app.post('/ticket-classes/add', (req, res) => {
+    const class_name = req.body.class_name
+    const upgrade_charge = req.body.upgrade_charge
+
+    const sql_insert = 
+        'INSERT INTO Ticket_Classes (class_name, upgrade_charge) VALUES (?,?)'
+
+    db.query(sql_insert, [class_name, upgrade_charge], (err, result) => {
+        if (err) {
+            console.log(err)
+            res.sendStatus(400)
+        } else{
+            res.sendStatus(201)
+        }
+        
     })
 })
 
@@ -152,11 +171,59 @@ app.put('/airports/:id', (req, res) => {
     })
 })
 
+// UPDATE Ticket Class
+app.put('/ticket-classes/:id', (req, res) => {
+    const class_name = req.body.class_name
+    const upgrade_charge = req.body.upgrade_charge
+    const sqlUpdate = 
+        "UPDATE Airports SET class_name = ?, upgrade_charge = ? WHERE class_id = ?"
+    
+    db.query(sqlUpdate, [class_name, upgrade_charge, id], (err, result) => {
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(200)
+        }
+    })
+})
+
 // DELETE controller *********************************************************
 // DELETE Passenger
 app.delete('/passengers/:id', (req, res) => {
     const id = req.params.id
     const sqlDelete = "DELETE FROM Passengers WHERE passenger_id = ?"
+    db.query(sqlDelete, id, (err, result) => {
+
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(204)
+        }
+    })
+})
+
+app.delete('/airports/:id', (req, res) => {
+    const id = req.params.id
+    const sqlDelete = "DELETE FROM Airports WHERE airport_id = ?"
+    db.query(sqlDelete, id, (err, result) => {
+
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(204)
+        }
+    })
+})
+
+app.delete('/ticket-classes/:id', (req, res) => {
+    const id = req.params.id
+    const sqlDelete = "DELETE FROM Ticket_Classes WHERE class_id = ?"
     db.query(sqlDelete, id, (err, result) => {
 
         if (result.affectedRows === 0) {

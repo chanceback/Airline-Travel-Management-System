@@ -1,59 +1,59 @@
-import React from "react";
+import React from 'react';
+import TicketClassesTable from '../components/tables/TicketClassesTable';
+import { useState, useEffect } from 'react';
+import { API_URL } from '../API';
+import { useNavigate } from 'react-router-dom';
 
-function TicketClassesPage() {
+function TicketClassesPage({ setTicketClassToUpdate }) {
+    // Use navigate for updating
+    const navigate = useNavigate()
+    // Use state to bring in the data
+    const [ticketClasses, setTicketClasses] = useState([]);
+
+    // RETRIEVE the list of ticket classes
+    const loadClasses = async () => {
+        const response = await fetch(`${API_URL}/ticket-classes`);
+        const ticketClasses = await response.json();
+        setTicketClasses(ticketClasses);
+    } 
+
+    // UPDATE 
+    const onEditTicketClasses = async ticketCLass => {
+        setTicketClassToUpdate(ticketCLass)
+        navigate('../ticket-classes-edit')
+    }
+
+    // CREATE 
+    const navigateToCreate = () => {
+        navigate('../ticket-classes-add')
+    }
+
+    // DELETE 
+    const onDeleteTicketClasses = async id => {
+        const response = await fetch(`${API_URL}/ticket-classes/${id}`, { method: 'DELETE' });
+        if (response.status === 204) {
+            const getResponse = await fetch(`${API_URL}/ticket-classes`);
+            const ticket_classes = await getResponse.json();
+            setTicketClasses(ticket_classes);
+        } else {
+            console.error(`Failed to delete ticket class with id = ${id}, status code = ${response.status}`)
+        }
+    }
+
+    // LOAD 
+    useEffect(() => {
+        loadClasses();
+    }, []);
+
     return(
         <>
         <h1>Ticket Classes</h1>
-        <table>
-        <thead>
-        <tr>
-            <th>ticket_class_id</th>
-            <th>class_name</th>
-            <th>upgrade_charge</th>
-            <th>edit</th>
-            <th>delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>First Class</td>
-            <td>5000</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Business</td>
-            <td>1000</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Premium Economy</td>
-            <td>500</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Economy</td>
-            <td>0</td>
-            <td><button>edit</button></td>
-            <td><button>delete</button></td>
-        </tr>
-        </tbody>
-        </table>
-
-        <form method="POST">
-        <legend><strong>Add New Ticket Class to Table</strong></legend>
-            <fieldset class="fields">
-                <label> class name </label> <input type="text" name="fname" />
-                <label> upgrade charge</label> <input type="number" name="lname" />    
-            </fieldset>
-          <input class="btn" type="submit" id="addTicketClass" value="Add" />
-	</form> 
+            <TicketClassesTable
+                    ticketClasses={ticketClasses} 
+                    onEdit={onEditTicketClasses} 
+                    onDelete={onDeleteTicketClasses} 
+                />
+            <button onClick={navigateToCreate}>Create New Ticket Class</button>
         </>
     )
 };
