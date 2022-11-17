@@ -11,16 +11,17 @@ content-type: application/json
 }
 
 ###
-DELETE http://flip3.engr.oregonstate.edu:11785/passengers/7 HTTP/1.1
+DELETE http://flip3.engr.oregonstate.edu:11785/flights/3 HTTP/1.1
 
 ###
-PUT http://flip3.engr.oregonstate.edu:11785/passengers/1 HTTP/1.1
+POST http://flip2.engr.oregonstate.edu:11785/flights/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "firstName": "Jacky", 
-    "lastName": "Wack", 
-    "passport": "637211721", 
-    "email": "tes23t@gmail.com", 
-    "phoneNumber":"318-234-1154"
+    "departure_airport": "KLGA",
+    "arrival_airport": "RJAA",
+    "departure_time": "2023-02-20T16:00:00.000Z",
+    "arrival_time": "2023-02-22T04:00:00.000Z",
+    "air_fare": 20000,
+    "capacity": 1000
 }

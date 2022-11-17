@@ -60,6 +60,29 @@ app.post('/airports/add', (req, res) => {
     })
 })
 
+// Add New Flight
+app.post('/flights/add', (req, res) => {
+    const id = req.params.id
+    const departure_airport = req.body.departure_airport
+    const arrival_airport = req.body.arrival_airport
+    const departure_time = req.body.departure_time
+    const arrival_time = req.body.arrival_time
+    const air_fare = req.body.air_fare
+    const capacity = req.body.capacity
+
+    const sql_insert = 
+        'INSERT INTO Flights (departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity) VALUES (?,?,?,?,?)'
+
+    db.query(sql_insert, [departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity], (err, result) => {
+        if (err) {
+            console.log(err)
+            res.sendStatus(400)
+        } else{
+            res.sendStatus(201)
+        }
+    })
+})
+
 // Add New Ticket Class
 app.post('/ticket-classes/add', (req, res) => {
     const class_name = req.body.class_name
@@ -96,13 +119,22 @@ app.get('/airports', (req, res) => {
     });
 });
 
-// Get Flights
-app.get('/flights', (req, res) => {
-    const sqlSelect = "SELECT * FROM Flights";
+// Get Flights Table data
+app.get('/flights-table', (req, res) => {
+    const sqlSelect = (
+        `SELECT Flights.flight_id, d_airport.airport_name as Departure, 
+            a_airport.airport_name as Arrival, Flights.departure_time, 
+            Flights.arrival_time, Flights.air_fare, Flights.capacity 
+            FROM Flights 
+            JOIN Airports as d_airport ON d_airport.airport_id = 
+            Flights.departure_airport JOIN Airports as a_airport 
+            ON a_airport.airport_id = Flights.arrival_airport`);
     db.query(sqlSelect, (err, result) => {
         res.send(result);
     });
 });
+
+// Get Flight by ID need to create a get for this
 
 // Get Itineraries
 app.get('/itineraries', (req, res) => {
@@ -171,6 +203,29 @@ app.put('/airports/:id', (req, res) => {
     })
 })
 
+// UPDATE Flight
+app.put('/flights/:id', (req, res) => {
+    const id = req.params.id
+    const departure_airport = req.body.departure_airport
+    const arrival_airport = req.body.arrival_airport
+    const departure_time = req.body.departure_time
+    const arrival_time = req.body.arrival_time
+    const air_fare = req.body.air_fare
+    const capacity = req.body.capacity
+    const sqlUpdate = 
+        "UPDATE Flights SET departure_airport = ?, arrival_airport = ?, departure_time = ?, arrival_time = ?, air_fare = ?, capacity = ? WHERE flight_id = ?"
+    
+    db.query(sqlUpdate, [departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity, id], (err, result) => {
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(200)
+        }
+    })
+})
+
 // UPDATE Ticket Class
 app.put('/ticket-classes/:id', (req, res) => {
     const id = req.params.id
@@ -207,6 +262,7 @@ app.delete('/passengers/:id', (req, res) => {
     })
 })
 
+// DELETE Airport
 app.delete('/airports/:id', (req, res) => {
     const id = req.params.id
     const sqlDelete = "DELETE FROM Airports WHERE airport_id = ?"
@@ -222,6 +278,23 @@ app.delete('/airports/:id', (req, res) => {
     })
 })
 
+// DELETE Flight
+app.delete('/flights/:id', (req, res) => {
+    const id = req.params.id
+    const sqlDelete = "DELETE FROM Flights WHERE flight_id = ?"
+    db.query(sqlDelete, id, (err, result) => {
+
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(204)
+        }
+    })
+})
+
+// DELETE Ticket Class
 app.delete('/ticket-classes/:id', (req, res) => {
     const id = req.params.id
     const sqlDelete = "DELETE FROM Ticket_Classes WHERE class_id = ?"

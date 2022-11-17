@@ -30,6 +30,7 @@ import UpdateTicketClassesPage from './pages/UpdateTicketClassesPage';
 function App() {
   const [passengerToUpdate, setPassengerToUpdate] = useState([])
   const [airportToUpdate, setAirportToUpdate] = useState([])
+  const [flightToUpdate, setFlightToUpdate] = useState([])
   const [ticketClassToUpdate, setTicketClassToUpdate] = useState([])
 
   return (
@@ -54,7 +55,7 @@ function App() {
             <Route path="passengers-add" element={<CreatePassengerPage />} />
             <Route path="passengers-edit" element={<UpdatePassengerPage passenger={passengerToUpdate} />} />
   
-            <Route path="flights" element={<FlightsPage />} />
+            <Route path="flights" element={<FlightsPage flightToUpdate={flightToUpdate} />} />
             <Route path="itineraries" element={<ItinerariesPage />} />
             <Route path="create-booking" element={<CreateBookingPage/>} />
             <Route path="tickets" element={<TicketsPage />} />
