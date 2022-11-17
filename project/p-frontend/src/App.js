@@ -58,7 +58,6 @@ function App() {
             <Route path="itineraries" element={<ItinerariesPage />} />
             <Route path="create-booking" element={<CreateBookingPage/>} />
             <Route path="tickets" element={<TicketsPage />} />
-            <Route path="ticket-classes" element={<TicketClassesPage />} />
 
             <Route path="ticket-classes" element={<TicketClassesPage setTicketClassToUpdate={setTicketClassToUpdate} />} />
             <Route path="ticket-classes-add" element={<CreateTicketClassesPage />} />

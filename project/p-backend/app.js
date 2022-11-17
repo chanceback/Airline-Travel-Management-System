@@ -173,10 +173,11 @@ app.put('/airports/:id', (req, res) => {
 
 // UPDATE Ticket Class
 app.put('/ticket-classes/:id', (req, res) => {
+    const id = req.params.id
     const class_name = req.body.class_name
     const upgrade_charge = req.body.upgrade_charge
     const sqlUpdate = 
-        "UPDATE Airports SET class_name = ?, upgrade_charge = ? WHERE class_id = ?"
+        "UPDATE Ticket_Classes SET class_name = ?, upgrade_charge = ? WHERE class_id = ?"
     
     db.query(sqlUpdate, [class_name, upgrade_charge, id], (err, result) => {
         if (result.affectedRows === 0) {
