@@ -1,47 +1,30 @@
-import React from "react";
+import React from 'react';
+import TicketsTable from '../components/tables/TicketsTable';
+import { useState, useEffect } from 'react';
+import { API_URL } from '../API';
 
 function TicketsPage() {
+
+    // Use state to bring in the data
+    const [tickets, setTickets] = useState([]);
+
+    // RETRIEVE the list of ticket classes
+    const loadTickets = async () => {
+        const response = await fetch(`${API_URL}/tickets`);
+        const tickets = await response.json();
+        setTickets(tickets);
+    } 
+
+    // LOAD 
+    useEffect(() => {
+        loadTickets();
+    }, []);
+
     return(
         <>
         <h1>Tickets</h1>
-        <table>
-        <thead>
-        <tr>
-            <th>ticket_id</th>
-            <th>itinerary_id</th>
-            <th>flight_id</th>
-            <th>ticket_class_id</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>1</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>3</td>
-            <td>3</td>
-            <td>4</td>
-        </tr>
-        </tbody>
-        </table>
-
-        <p><strong>Tickets are created through the booking page. To delete a ticket, delete the Itinerary containing the ticket.</strong></p>
+        <TicketsTable tickets={tickets} />
+        <p>Tickets are created through the booking page. To delete a ticket, delete the Itinerary containing the ticket.</p>
         </>
     )
 };
