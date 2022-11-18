@@ -14,14 +14,14 @@ content-type: application/json
 DELETE http://flip3.engr.oregonstate.edu:11785/flights/3 HTTP/1.1
 
 ###
-POST http://flip2.engr.oregonstate.edu:11785/flights/add HTTP/1.1
+PUT http://flip2.engr.oregonstate.edu:11785/flights/2 HTTP/1.1
 Content-Type: application/json
 
 {
     "departure_airport": "KLGA",
     "arrival_airport": "RJAA",
-    "departure_time": "2023-02-20T16:00:00.000Z",
-    "arrival_time": "2023-02-22T04:00:00.000Z",
+    "departure_time": "STR_TO_DATE('2022-11-19T23:03' '%Y%m%d %H%i')",
+    "arrival_time": "CAST('2022-11-19T23:07' AS datetime)",
     "air_fare": 20000,
     "capacity": 1000
 }

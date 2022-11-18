@@ -23,6 +23,9 @@ import UpdatePassengerPage from './pages/UpdatePassengerPage';
 import CreateAirportsPage from './pages/CreateAirportsPage';
 import UpdateAirportsPage from './pages/UpdateAirportsPage';
 
+import CreateFlightsPage from './pages/CreateFlightsPage';
+import UpdateFlightsPage from './pages/UpdateFlightsPage';
+
 import CreateTicketClassesPage from './pages/CreateTicketClassesPage';
 import UpdateTicketClassesPage from './pages/UpdateTicketClassesPage'; 
 
@@ -55,9 +58,12 @@ function App() {
             <Route path="passengers-add" element={<CreatePassengerPage />} />
             <Route path="passengers-edit" element={<UpdatePassengerPage passenger={passengerToUpdate} />} />
   
-            <Route path="flights" element={<FlightsPage flightToUpdate={flightToUpdate} />} />
+            <Route path="flights" element={<FlightsPage setFlightToUpdate={setFlightToUpdate} />} />
+            <Route path="flights-add" element={<CreateFlightsPage />} />
+            <Route path="flights-edit" element={<UpdateFlightsPage flight={flightToUpdate} />} />
+
             <Route path="itineraries" element={<ItinerariesPage />} />
-            <Route path="create-booking" element={<CreateBookingPage/>} />
+            <Route path="create-booking" element={<CreateBookingPage />} />
             <Route path="tickets" element={<TicketsPage />} />
 
             <Route path="ticket-classes" element={<TicketClassesPage setTicketClassToUpdate={setTicketClassToUpdate} />} />

@@ -213,10 +213,10 @@ app.put('/flights/:id', (req, res) => {
     const air_fare = req.body.air_fare
     const capacity = req.body.capacity
     const sqlUpdate = 
-        "UPDATE Flights SET departure_airport = ?, arrival_airport = ?, departure_time = ?, arrival_time = ?, air_fare = ?, capacity = ? WHERE flight_id = ?"
+        "UPDATE Flights SET departure_airport = ?, arrival_airport = ?, departure_time = CAST(? AS datetime), arrival_time = CAST(? AS datetime), air_fare = ?, capacity = ? WHERE flight_id = ?"
     
     db.query(sqlUpdate, [departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity, id], (err, result) => {
-        if (result.affectedRows === 0) {
+        if (err) {
             console.log(err)
             res.sendStatus(404)
         } else{
