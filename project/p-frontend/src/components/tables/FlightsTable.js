@@ -1,5 +1,6 @@
 import React from 'react';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
+
 // Needs to receive a JSON from a fetch in airports page
 function FlightsTable({ flights, onEdit, onDelete }) {
     return (
@@ -23,8 +24,8 @@ function FlightsTable({ flights, onEdit, onDelete }) {
                         <td>{flight.flight_id}</td>
                         <td>{flight.Departure}</td>
                         <td>{flight.Arrival}</td>
-                        <td>{flight.departure_time}</td>
-                        <td>{flight.arrival_time}</td>
+                        <td>{flight.dt}</td>
+                        <td>{flight.at}</td>
                         <td>{flight.air_fare}</td>
                         <td>{flight.capacity}</td>
                         <td><MdEdit onClick={() => onEdit(flight)} /></td>

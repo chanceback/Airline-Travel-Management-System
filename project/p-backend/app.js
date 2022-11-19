@@ -7,7 +7,7 @@ const express = require('express');   // We are using the express library for th
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        =  11785;                 // Set a port number at the top so it's easy to change in the future
+PORT        =  11789;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 const db = require('./database/db-connector').pool
@@ -62,7 +62,6 @@ app.post('/airports/add', (req, res) => {
 
 // Add New Flight
 app.post('/flights/add', (req, res) => {
-    const id = req.params.id
     const departure_airport = req.body.departure_airport
     const arrival_airport = req.body.arrival_airport
     const departure_time = req.body.departure_time
@@ -71,7 +70,7 @@ app.post('/flights/add', (req, res) => {
     const capacity = req.body.capacity
 
     const sql_insert = 
-        'INSERT INTO Flights (departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity) VALUES (?,?,?,?,?)'
+        'INSERT INTO Flights (departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity) VALUES (?,?,CAST(? AS datetime),CAST(? AS datetime),?,?)'
 
     db.query(sql_insert, [departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity], (err, result) => {
         if (err) {
@@ -122,9 +121,9 @@ app.get('/airports', (req, res) => {
 // Get Flights Table data
 app.get('/flights-table', (req, res) => {
     const sqlSelect = (
-        `SELECT Flights.flight_id, d_airport.airport_name as Departure, 
-            a_airport.airport_name as Arrival, Flights.departure_time, 
-            Flights.arrival_time, Flights.air_fare, Flights.capacity 
+        `SELECT Flights.flight_id, Flights.departure_airport, Flights.arrival_airport, d_airport.airport_name as Departure, 
+            a_airport.airport_name as Arrival, CAST(Flights.departure_time AS char) as dt, 
+            CAST(Flights.arrival_time AS char) as at, Flights.air_fare, Flights.capacity 
             FROM Flights 
             JOIN Airports as d_airport ON d_airport.airport_id = 
             Flights.departure_airport JOIN Airports as a_airport 
@@ -315,5 +314,5 @@ app.delete('/ticket-classes/:id', (req, res) => {
     LISTENER
 */
 app.listen(PORT, () => {            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
-    console.log('Express started on http://flip3.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.')
+    console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.')
 });

@@ -3,10 +3,10 @@ import { API_URL } from "../API";
 import { useNavigate } from 'react-router-dom';
 
 function UpdateFlightsPage({ flight }){
-    const [departureAirport, setDepartureAirport] = useState('')
-    const [arrivalAirport, setArrivalAirport] = useState('')
-    const [departureTime, setDepartureTime] = useState(flight.departure_time)
-    const [arrivalTime, setArrivalTime] = useState(flight.arrival_time)
+    const [departureAirport, setDepartureAirport] = useState(flight.departure_airport)
+    const [arrivalAirport, setArrivalAirport] = useState(flight.arrival_airport)
+    const [departureTime, setDepartureTime] = useState(flight.dt)
+    const [arrivalTime, setArrivalTime] = useState(flight.at)
     const [airfare, setAirfare] = useState(flight.air_fare)
     const [capacity, setCapacity] = useState(flight.capacity)
 
@@ -42,7 +42,7 @@ function UpdateFlightsPage({ flight }){
     const loadAirports = async () => {
         const response = await fetch(`${API_URL}/airports`);
         const airports = await response.json();
-        setAirports(airports);
+        setAirports(airports)
     } 
 
     // LOAD Airports
@@ -57,19 +57,17 @@ function UpdateFlightsPage({ flight }){
         <form onSubmit={(e) => { e.preventDefault();}}>
         <legend><strong>Edit Flight: {flight.flight_id}</strong></legend>
             <fieldset class="fields">
-                <label>Departure Airport</label> 
-                <select name="departure-airport">
-                    <option value="null">select</option>
-                    {airports.map((airport, i) => 
-                        <option value={departureAirport} OnChange={e => setDepartureAirport(e.target.value)}>{airport.airport_name}</option>
+                <label>Departure Airport</label>
+                <select value={departureAirport} onChange={e => setDepartureAirport(e.target.value)}>
+                    {airports.map((airport, i) =>
+                        <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
                     )}
                 </select>
-
-                <label>Arrival Airport</label> 
-                <select name="arrival-airport">
-                    <option value="null">select</option>
-                    {airports.map((airport, i) => 
-                        <option value={arrivalAirport} OnChange={e => setArrivalAirport(e.target.value)}>{airport.airport_name}</option>
+                
+                <label>Arrival Airport</label>
+                <select value={arrivalAirport} onChange={e => setArrivalAirport(e.target.value)}>
+                    {airports.map((airport, i) =>
+                        <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
                     )}
                 </select>
 
@@ -111,8 +109,9 @@ function UpdateFlightsPage({ flight }){
                 </label>     
             </fieldset>
 	</form> 
-        </>
+    </>
     )
 }
+
 
 export default UpdateFlightsPage;

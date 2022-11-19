@@ -20,8 +20,8 @@ Content-Type: application/json
 {
     "departure_airport": "KLGA",
     "arrival_airport": "RJAA",
-    "departure_time": "STR_TO_DATE('2022-11-19T23:03' '%Y%m%d %H%i')",
-    "arrival_time": "CAST('2022-11-19T23:07' AS datetime)",
+    "departure_time": "2022-11-19 23:03:00",
+    "arrival_time": "",
     "air_fare": 20000,
     "capacity": 1000
 }
