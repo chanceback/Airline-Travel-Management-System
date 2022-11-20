@@ -29,12 +29,15 @@ import UpdateFlightsPage from './pages/UpdateFlightsPage';
 import CreateTicketClassesPage from './pages/CreateTicketClassesPage';
 import UpdateTicketClassesPage from './pages/UpdateTicketClassesPage'; 
 
+import ViewItineraryPage from './pages/ViewItineraryPage';
+
 
 function App() {
   const [passengerToUpdate, setPassengerToUpdate] = useState([])
   const [airportToUpdate, setAirportToUpdate] = useState([])
   const [flightToUpdate, setFlightToUpdate] = useState([])
   const [ticketClassToUpdate, setTicketClassToUpdate] = useState([])
+  const [itineraryToView, setItineraryToView] = useState([])
 
   return (
     <Router>
@@ -62,7 +65,8 @@ function App() {
             <Route path="flights-add" element={<CreateFlightsPage />} />
             <Route path="flights-edit" element={<UpdateFlightsPage flight={flightToUpdate} />} />
 
-            <Route path="itineraries" element={<ItinerariesPage />} />
+            <Route path="itineraries" element={<ItinerariesPage setItineraryToView={setItineraryToView} />} />
+            <Route path="itineraries-view" element={<ViewItineraryPage itinerary={itineraryToView} />} />
             <Route path="create-booking" element={<CreateBookingPage />} />
             <Route path="tickets" element={<TicketsPage />} />
 

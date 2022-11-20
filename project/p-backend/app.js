@@ -121,7 +121,8 @@ app.get('/airports', (req, res) => {
 // Get Flights Table data
 app.get('/flights-table', (req, res) => {
     const sqlSelect = (
-        `SELECT Flights.flight_id, Flights.departure_airport, Flights.arrival_airport, d_airport.airport_name as Departure, 
+        `SELECT Flights.flight_id, Flights.departure_airport, Flights.arrival_airport, 
+            d_airport.airport_name as Departure, 
             a_airport.airport_name as Arrival, CAST(Flights.departure_time AS char) as dt, 
             CAST(Flights.arrival_time AS char) as at, Flights.air_fare, Flights.capacity 
             FROM Flights 
@@ -133,12 +134,35 @@ app.get('/flights-table', (req, res) => {
     });
 });
 
-// Get Flight by ID need to create a get for this
-
 // Get Itineraries
-app.get('/itineraries', (req, res) => {
-    const sqlSelect = "SELECT * FROM Itineraries";
+app.get('/itineraries-table', (req, res) => {
+    const sqlSelect = `SELECT Itineraries.itinerary_id, Passengers.first_name as first_name, 
+        Passengers.last_name as last_name, Passengers.passport as passport, Itineraries.trip_name 
+        FROM Itineraries 
+        JOIN Passengers 
+        ON Passengers.passenger_id = Itineraries.passenger_id;
+    `;
     db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+});
+
+// Get Itinerary Flight Path
+app.get('/itineraries/:id', (req, res) => {
+    const id = req.params.id
+    const sqlSelect = (
+        `SELECT Flights.flight_id, Flights.departure_airport, Flights.arrival_airport, 
+            d_airport.airport_name as Departure, 
+            a_airport.airport_name as Arrival, CAST(Flights.departure_time AS char) as dt, 
+            CAST(Flights.arrival_time AS char) as at, Flights.air_fare, Flights.capacity 
+            FROM Flights 
+            JOIN Airports as d_airport ON d_airport.airport_id = 
+            Flights.departure_airport JOIN Airports as a_airport 
+            ON a_airport.airport_id = Flights.arrival_airport
+            JOIN Tickets ON Tickets.flight_id = Flights.flight_id
+            WHERE Tickets.itinerary_id = ?
+            ORDER BY Tickets.ticket_id ASC `);
+    db.query(sqlSelect, [id], (err, result) => {
         res.send(result);
     });
 });
@@ -297,6 +321,22 @@ app.delete('/flights/:id', (req, res) => {
 app.delete('/ticket-classes/:id', (req, res) => {
     const id = req.params.id
     const sqlDelete = "DELETE FROM Ticket_Classes WHERE class_id = ?"
+    db.query(sqlDelete, id, (err, result) => {
+
+        if (result.affectedRows === 0) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(204)
+        }
+    })
+})
+
+// DELETE Itinerary
+app.delete('/itineraries/:id', (req, res) => {
+    const id = req.params.id
+    const sqlDelete = "DELETE FROM Itineraries WHERE itinerary_id = ?"
     db.query(sqlDelete, id, (err, result) => {
 
         if (result.affectedRows === 0) {

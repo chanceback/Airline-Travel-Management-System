@@ -23,7 +23,6 @@ function CreateFlightsPage() {
                 arrival_time: arrivalTime,
                 air_fare: airfare,
                 capacity: capacity
-
             }),
             headers: {
                 'Content-Type': 'application/json',

@@ -1,51 +1,54 @@
-import React from "react";
+import React from 'react';
+import ItinerariesTable from '../components/tables/ItinerariesTable';
+import { useState, useEffect } from 'react';
+import { API_URL } from '../API';
+import { useNavigate } from 'react-router-dom';
 
-function ItinerariesPage() {
+function ItinerariesPage({ setItineraryToView }) {
+    // Use navigate for updating
+    const navigate = useNavigate()
+
+    // Use state to bring in the data
+    const [itineraries, setItineraries] = useState([]);
+    
+    // RETRIEVE list of flights
+    const loadItineraries = async () => {
+        const response = await fetch(`${API_URL}/itineraries-table`);
+        const itineraries = await response.json();
+        setItineraries(itineraries);
+    } 
+
+    // VIEW Itinerary
+    const onViewItinerary = async itinerary => {
+        setItineraryToView(itinerary)
+        navigate('../itineraries-view')
+    }
+
+    // DELETE Itinerary
+    const onDeleteItinerary = async id => {
+        const response = await fetch(`${API_URL}/itineraries/${id}`, { method: 'DELETE' });
+        if (response.status === 204) {
+            const getResponse = await fetch(`${API_URL}/itineraries-table`);
+            const itineraries = await getResponse.json();
+            setItineraries(itineraries);
+        } else {
+            console.error(`Failed to delete itinerary with id = ${id}, status code = ${response.status}`)
+        }
+    }
+
+    // LOAD Airports
+    useEffect(() => {
+        loadItineraries();
+    }, []);
+
     return(
         <>
         <h1>Itineraries</h1>
-        <table>
-        <thead>
-        <tr>
-            <th>itinerary_id</th>
-            <th>first_name</th>
-            <th>last_name</th>
-            <th>passport_#</th>
-            <th>trip_name</th>
-            <th>view</th>
-            <th>cancel</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Sterling</td>
-            <td>Archer</td>
-            <td>542637785</td>
-            <td>Archer Vacation 2022</td>
-            <td><button>view</button></td>
-            <td><button>cancel</button></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Stede</td>
-            <td>Bonnet</td>
-            <td>919608451</td>
-            <td>Bonnet Business Trip</td>
-            <td><button>view</button></td>
-            <td><button>cancel</button></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Buffy</td>
-            <td>Summers</td>
-            <td>678996728</td>
-            <td>Buffy Family Trip</td>
-            <td><button>view</button></td>
-            <td><button>cancel</button></td>
-        </tr>
-        </tbody>
-        </table>
+            <ItinerariesTable
+                    itineraries={itineraries} 
+                    onView={onViewItinerary} 
+                    onDelete={onDeleteItinerary} 
+                />
         </>
     )
 };
