@@ -101,6 +101,27 @@ app.post('/ticket-classes/add', (req, res) => {
     })
 })
 
+// Add New Booking
+app.post('/booking/add', (req, res) => {
+    const passenger_id = req.body.passenger_id
+    const trip_name = req.body.tripName
+    const class_id = req.body.ticketClass
+    const flights = req.body.flightChoices
+
+    const sql_insert = 
+        'INSERT INTO Ticket_Classes (class_name, upgrade_charge) VALUES (?,?)'
+
+    db.query(sql_insert, [class_name, upgrade_charge], (err, result) => {
+        if (err) {
+            console.log(err)
+            res.sendStatus(400)
+        } else{
+            res.sendStatus(201)
+        }
+        
+    })
+})
+
 // RETRIEVE controller *******************************************************
 // Get Passengers
 app.get('/passengers', (req, res) => {

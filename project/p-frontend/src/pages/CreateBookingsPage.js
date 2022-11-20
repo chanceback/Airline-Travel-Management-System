@@ -1,31 +1,52 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { API_URL } from "../API";
-import {MdAddCircleOutline} from 'react-icons/md'
+import {MdRemoveCircleOutline, MdAddCircleOutline} from 'react-icons/md'
 
 function CreateBookingPage({passenger}) {
-    const [ticketClass, setTicketClass] = useState('')
+    const navigate = useNavigate()
 
-    const [flightChoices, setFlightChoices] = useState([''])
-    const [inputFields, setInputFields] = useState([''])
-    const handleAddFields = () => {
-        setInputFields([...inputFields, []])
+    const passenger_id = passenger.passenger_id
+    const [ticketClass, setTicketClass] = useState('')
+    const [tripName, setTripName] = useState('')
+    const [flightChoices, setFlightChoice] = useState([{flight:''}])
+
+    const handleAddFlight = () => {
+        if (flightChoices.length < 5) {
+            setFlightChoice([...flightChoices, {flight:''}])
+        }
+    }
+    const handleRemoveFlight = () => {
+        if (flightChoices.length > 1){
+            const data = [...flightChoices]
+            data.pop()
+            setFlightChoice(data)
+        }
     }
 
-    const handleChangeInput = (id, event) => {
-        const newInputFields = inputFields.map(i => {
-          if(id === i.id) {
-            i[event.target.name] = event.target.value
-          }
-          return i;
-        })
-        
-        setInputFields(newInputFields);
-      }
+
+    const createBooking = async () => {
+
+        const newBooking = { passenger_id, tripName, ticketClass, flightChoices }
+        const response = await fetch(`${API_URL}/booking/add}`, {
+            method: 'post',
+            body: JSON.stringify(newBooking),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if(response.status === 201){
+            alert("Successfully created the Booking!")
+
+        } else {
+            alert(`Failed to create booking, status code = ${response.status}`)
+        };
+        navigate('../booking')
+    }
 
 
 
-
-    // Use state to bring in the data
+    // Retrieve ALL Drop Menu Data
     const [flights, setFlights] = useState([]);
     const [classes, setClasses] = useState([])
     
@@ -36,14 +57,14 @@ function CreateBookingPage({passenger}) {
         setFlights(flights);
     } 
 
-    // RETRIEVE the list of flights
+    // RETRIEVE the list of ticket classes
     const loadClasses = async () => {
         const response = await fetch(`${API_URL}/ticket-classes`);
         const classes = await response.json();
         setClasses(classes);
     } 
 
-    // LOAD Flights
+    // LOAD Flights and Ticket Classes
     useEffect(() => {
         loadFlights()
         loadClasses()
@@ -58,6 +79,8 @@ function CreateBookingPage({passenger}) {
         
         <form onSubmit={(e) => { e.preventDefault();}}>
             <fieldset class="fields">
+                <label>Trip Name</label>
+                <input type="text" placeholder="Enter name for trip..." value={tripName} onChange={e => setTripName(e.target.value)} />
                 <label>Flight Class</label>
                 <select value={ticketClass}  onChange={e => setTicketClass(e.target.value)}>
                     <option value="null">Select...</option>
@@ -66,38 +89,30 @@ function CreateBookingPage({passenger}) {
                     )}
                 </select>
                 
-                {inputFields.map((inputField, i) => 
+                {flightChoices.map((flightChoice, i) => {
+                    return(
                     <>
                     <label>Flight {i+1}</label>
-                    <select value={inputFields[i]} onChange={e => setInputFields[i](e.target.value)}>
-                        <option value="null">Select...</option>
+                    <select value={flightChoices[i][0]} onChange={e => setFlightChoice[i][0](e.target.value)}>
+                        <option value="">Select...</option>
                         {flights.map((flight, i) =>
-                            <option value={flight} key={i}>
-                                {`${flight.Departure} -> ${flight.Arrival}
+                            <option value={flight.flight_id} key={i}>
+                                {`${flight.Departure} -> ${flight.Arrival} |
                                 ${flight.dt} -> ${flight.at}`}
                             </option>
                         )}
                     </select>
-                    <MdAddCircleOutline onClick={handleAddFields} />
                     </>
                 )}
+                )}
 
-                    <label>Flight</label>
-                    <select value={inputFields} onChange={e => setInputFields(e.target.value)}>
-                        <option value="null">Select...</option>
-                        {flights.map((flight, i) =>
-                            <option value={flight} key={i}>
-                                {`${flight.Departure} -> ${flight.Arrival}
-                                ${flight.dt} -> ${flight.at}`}
-                            </option>
-                        )}
-                    </select>
-                    <MdAddCircleOutline onClick={handleAddFields} />
+                <MdRemoveCircleOutline onClick={handleRemoveFlight}/>
+                <MdAddCircleOutline onClick={handleAddFlight} />
 
                 <label for="submit">
                     <button
                         type="submit"
-                        
+                        onClick={createBooking}
                         id="submit"
                     >Book</button>
                 </label>     
