@@ -13,7 +13,7 @@ import PassengersPage from './pages/PassengersPage';
 import AirportsPage from './pages/AirportsPage';
 import FlightsPage from './pages/FlightsPage';
 import ItinerariesPage from './pages/ItinerariesPage';
-import CreateBookingPage from './pages/CreateBookingPage';
+import BookingPage from './pages/BookingPage';
 import TicketsPage from './pages/TicketsPage';
 import TicketClassesPage from './pages/TicketClassesPage';
 
@@ -31,6 +31,9 @@ import UpdateTicketClassesPage from './pages/UpdateTicketClassesPage';
 
 import ViewItineraryPage from './pages/ViewItineraryPage';
 
+import BookingPassengersPage from './pages/BookingPassengersPage';
+import CreateBookingPage from './pages/CreateBookingsPage';
+
 
 function App() {
   const [passengerToUpdate, setPassengerToUpdate] = useState([])
@@ -38,6 +41,8 @@ function App() {
   const [flightToUpdate, setFlightToUpdate] = useState([])
   const [ticketClassToUpdate, setTicketClassToUpdate] = useState([])
   const [itineraryToView, setItineraryToView] = useState([])
+  const [passengerResults, setPassengerResults] = useState([])
+  const [bookingPassenger, setBookingPassenger] = useState([])
 
   return (
     <Router>
@@ -67,7 +72,11 @@ function App() {
 
             <Route path="itineraries" element={<ItinerariesPage setItineraryToView={setItineraryToView} />} />
             <Route path="itineraries-view" element={<ViewItineraryPage itinerary={itineraryToView} />} />
-            <Route path="create-booking" element={<CreateBookingPage />} />
+
+            <Route path="booking" element={<BookingPage setPassengerResults={setPassengerResults} />} />
+            <Route path="booking-search" element={<BookingPassengersPage passengers={passengerResults} setBookingPassenger={setBookingPassenger} />} />
+            <Route path="booking-add" element={<CreateBookingPage passenger={bookingPassenger} />} />
+
             <Route path="tickets" element={<TicketsPage />} />
 
             <Route path="ticket-classes" element={<TicketClassesPage setTicketClassToUpdate={setTicketClassToUpdate} />} />

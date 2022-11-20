@@ -10,7 +10,7 @@ function Navigation() {
         <Link to="airports">Airports</Link>
         <Link to="flights">Flights</Link>
         <Link to="itineraries">Itineraries</Link>
-        <Link to="create-booking">Create Booking</Link>
+        <Link to="booking">Book Trip</Link>
         <Link to="ticket-classes">Ticket Classes</Link>
         <Link to="Tickets">Tickets</Link>
 

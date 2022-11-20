@@ -110,6 +110,16 @@ app.get('/passengers', (req, res) => {
     });
 });
 
+// Get Passengers by First and Last Name
+app.get('/passengers/:fname/:lname', (req, res) => {
+    const first_name = req.params.fname
+    const last_name = req.params.lname
+    const sqlSelect = "SELECT * FROM Passengers WHERE first_name = ? AND last_name = ?";
+    db.query(sqlSelect, [first_name, last_name], (err, result) => {
+        res.send(result);
+    });
+});
+
 // Get Airports
 app.get('/airports', (req, res) => {
     const sqlSelect = "SELECT * FROM Airports";
