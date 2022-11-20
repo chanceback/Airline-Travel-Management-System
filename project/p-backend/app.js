@@ -105,23 +105,39 @@ app.post('/ticket-classes/add', (req, res) => {
 app.post('/booking/add', (req, res) => {
     const passenger_id = req.body.passenger_id
     const trip_name = req.body.tripName
-    const class_id = req.body.ticketClass
+    const ticket_class = req.body.ticketClass
     const flights = req.body.flightChoices
 
-    const sql_insert = 
-        'INSERT INTO Ticket_Classes (class_name, upgrade_charge) VALUES (?,?)'
+    console.log(req)
 
-    db.query(sql_insert, [class_name, upgrade_charge], (err, result) => {
+    const sql_query_1 = 
+        'INSERT INTO Itineraries (passenger_id, trip_name) VALUES (?,?)'
+    const sql_query_2 =
+        `INSERT INTO Tickets (itinerary_id, flight_id, ticket_class) 
+        VALUES 
+        (
+            (SELECT Itineraries.itinerary_id FROM Itineraries WHERE Itineraries.passenger_id = ${passenger_id} AND Itineraries.trip_name = '${trip_name}'),
+            ?,
+            ?
+        )`
+
+    db.query(sql_query_1, [passenger_id, trip_name], (err, result) => {
         if (err) {
             console.log(err)
             res.sendStatus(400)
         } else{
+            flights.map((flight_id, i) => {
+                db.query(sql_query_2, [flight_id, ticket_class], (err, result) => {
+                    if (err) {
+                        console.log(err)
+                        res.sendStatus(400)
+                    }
+                })
+            })
             res.sendStatus(201)
         }
-        
     })
 })
-
 // RETRIEVE controller *******************************************************
 // Get Passengers
 app.get('/passengers', (req, res) => {

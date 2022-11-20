@@ -9,11 +9,11 @@ function CreateBookingPage({passenger}) {
     const passenger_id = passenger.passenger_id
     const [ticketClass, setTicketClass] = useState('')
     const [tripName, setTripName] = useState('')
-    const [flightChoices, setFlightChoice] = useState([{flight:''}])
+    const [flightChoices, setFlightChoice] = useState([''])
 
     const handleAddFlight = () => {
         if (flightChoices.length < 5) {
-            setFlightChoice([...flightChoices, {flight:''}])
+            setFlightChoice([...flightChoices, ''])
         }
     }
     const handleRemoveFlight = () => {
@@ -24,11 +24,17 @@ function CreateBookingPage({passenger}) {
         }
     }
 
+    const handleFlightChange = (index, event) => {
+        const data = [...flightChoices];
+        data[index] = event.target.value;
+        setFlightChoice(data)
+    }
+
 
     const createBooking = async () => {
 
         const newBooking = { passenger_id, tripName, ticketClass, flightChoices }
-        const response = await fetch(`${API_URL}/booking/add}`, {
+        const response = await fetch(`${API_URL}/booking/add`, {
             method: 'post',
             body: JSON.stringify(newBooking),
             headers: {
@@ -93,7 +99,7 @@ function CreateBookingPage({passenger}) {
                     return(
                     <>
                     <label>Flight {i+1}</label>
-                    <select value={flightChoices[i][0]} onChange={e => setFlightChoice[i][0](e.target.value)}>
+                    <select value={flightChoices[i]} onChange={e => handleFlightChange(i, e)}>
                         <option value="">Select...</option>
                         {flights.map((flight, i) =>
                             <option value={flight.flight_id} key={i}>

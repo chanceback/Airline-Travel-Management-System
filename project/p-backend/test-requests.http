@@ -14,14 +14,12 @@ content-type: application/json
 DELETE http://flip3.engr.oregonstate.edu:11785/flights/3 HTTP/1.1
 
 ###
-PUT http://flip2.engr.oregonstate.edu:11785/flights/2 HTTP/1.1
+POST http://flip2.engr.oregonstate.edu:11789/booking/add HTTP/1.1
 Content-Type: application/json
 
 {
-    "departure_airport": "KLGA",
-    "arrival_airport": "RJAA",
-    "departure_time": "2022-11-19 23:03:00",
-    "arrival_time": "",
-    "air_fare": 20000,
-    "capacity": 1000
+    "passenger_id": 1,
+    "tripName": "Test Trip",
+    "ticketClass": 2,
+    "flightChoices": [2, 3]
 }
