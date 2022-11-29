@@ -37,6 +37,10 @@ function CreateTicketClassesPage() {
                 <input 
                     type="text" 
                     name="class_name"
+                    placeholder="Enter class type:"
+                    pattern="^[a-zA-Z \s]+$"
+                    maxlength="15"
+                    required 
                     value={class_name}
                     onChange={e => setClass_name(e.target.value)} 
                     id="class_name" />
@@ -45,6 +49,11 @@ function CreateTicketClassesPage() {
                 <input 
                     type="text" 
                     name="upgrade_charge"
+                    placeholder="Enter Upgrade Charge:"
+                    pattern="[0-9]+"
+                    maxlength="5"
+                    minlength="3"
+                    required
                     value={upgrade_charge}
                     onChange={e => setUpgrade_charge(e.target.value)}
                     id="upgrade_charge" />
