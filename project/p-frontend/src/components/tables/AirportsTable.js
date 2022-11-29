@@ -10,8 +10,8 @@ function AirportsTable({ airports, onEdit, onDelete }) {
                     <th>Airport ID</th>
                     <th>Airport Name</th>
                     <th>Airport Location</th>
-                    <th>edit</th>
-                    <th>delete</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
