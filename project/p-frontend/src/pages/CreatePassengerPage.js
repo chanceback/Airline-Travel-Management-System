@@ -36,44 +36,59 @@ function CreatePassengerPage() {
     <form onSubmit={(e) => { e.preventDefault();}}>
         <legend><strong>Add New Passenger to Table</strong></legend>
             <fieldset class="fields">
-                <label for="firstName"> first name </label>
+                <label for="firstName"> First Name </label>
                 <input 
                     type="text" 
                     name="firstName"
+                    placeholder="Enter a first name:"
+                    pattern="[a-zA-Z]+"
+                    required 
                     value={firstName}
                     onChange={e => setFirstName(e.target.value)}
                     id="firstName" />
 
-                <label> last name </label> 
+                <label> Last Name </label> 
                 <input 
                     type="text" 
                     name="lastName"
+                    placeholder="Enter a last name:"
+                    pattern="[a-zA-Z]+"
+                    required 
                     value={lastName}
                     onChange={e => setLastName(e.target.value)} 
                     id="lastName" />
 
-                <label> passport # </label> 
+                <label> Passport # </label> 
                 <input 
-                    type="text" 
+                    type="passport" 
                     name="passport"
+                    placeholder="Enter a 9 digit passport #:"
+                    required
+                    minlength="9"
+                    maxlength="9"
                     value={passport}
                     onChange={e => setPassport(e.target.value)}
                     id="passport" />
-                <label> email </label> 
+                <label for="email"> E-mail </label> 
                 <input 
                     type="email" 
                     name="email"
+                    placeholder="Enter @hello.com e-mail address:"
+                    pattern=".+@hello\.com"
+                    size="30"
+                    required
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     id="email" />
-                <label> phone number </label> 
-                <input 
-                    type="text" 
+                <label for="phone"> Telephone Number </label> 
+                <input type="phone" 
                     name="phone"
+                    placeholder="Enter phone #:"
+                    pattern="[0-9{3}-[0-9]{3}-[0-9]{4}"
+                    required 
                     value={phoneNumber}
                     onChange={e => setPhoneNumber(e.target.value)}
-                    id="phoneNumber" />  
-
+                    id="phone" />  
                 <label for="submit">
                     <button
                         type="submit"
