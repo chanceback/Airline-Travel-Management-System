@@ -125,7 +125,7 @@ function CreateBookingPage({passenger}) {
             </fieldset>
 	</form> 
 
-        <p>The submission of this form acts as the INSERT for Tickets and Itineraries</p>
+        <p>The submission of this form acts as the INSERT for Tickets & Itineraries</p>
         </>
     )
 };
