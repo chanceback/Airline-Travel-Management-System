@@ -12,8 +12,8 @@ function ItinerariesTable({ itineraries, onView, onDelete }) {
                     <th>Last Name</th>
                     <th>Passport</th>
                     <th>Trip Name</th>
-                    <th>view</th>
-                    <th>delete</th>
+                    <th>View</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
