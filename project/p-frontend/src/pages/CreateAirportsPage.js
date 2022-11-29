@@ -36,24 +36,33 @@ function CreateAirportsPage() {
             <fieldset class="fields">
                 <label for="airport_id"> Airport ID </label>
                 <input 
-                    type="text" 
+                    type="airport_id" 
                     name="airport_id"
+                    placeholder="Enter Airport ID:"
+                    pattern="[a-zA-Z]+"
+                    required 
                     value={airport_id}
                     onChange={e => setAirport_id(e.target.value)}
                     id="airport_id" />
 
                 <label> Airport Name </label> 
                 <input 
-                    type="text" 
+                    type="airport_name" 
                     name="airport_name"
+                    placeholder="Enter Airport Name:"
+                    pattern="^[a-zA-Z \s]+$"
+                    required
                     value={airport_name}
                     onChange={e => setAirport_name(e.target.value)} 
                     id="airport_name" />
 
                 <label> Airport location </label> 
                 <input 
-                    type="text" 
+                    type="airport_location" 
                     name="airport_location"
+                    placeholder="Enter Airport Location:"
+                    pattern="^[a-zA-Z \s]+$"
+                    required
                     value={airport_location}
                     onChange={e => setAirport_location(e.target.value)}
                     id="airport_location" />
