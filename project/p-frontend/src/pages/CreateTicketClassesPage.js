@@ -37,7 +37,7 @@ function CreateTicketClassesPage() {
                 <input 
                     type="text" 
                     name="class_name"
-                    placeholder="Enter class type:"
+                    placeholder="Enter Class Name:"
                     pattern="^[a-zA-Z \s]+$"
                     maxlength="15"
                     required 
