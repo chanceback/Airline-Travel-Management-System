@@ -8,14 +8,14 @@ function PassengersTable({ passengers, onEdit, onDelete }) {
             <caption>Current Passengers</caption>
             <thead>
                 <tr>
-                    <th>passenger_id</th>
-                    <th>first_name</th>
-                    <th>last_name</th>
-                    <th>passport</th>
-                    <th>email</th>
-                    <th>phone_number</th>
-                    <th>edit</th>
-                    <th>delete</th>
+                    <th>Passenger ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Passport</th>
+                    <th>E-mail</th>
+                    <th>Phone Number</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
