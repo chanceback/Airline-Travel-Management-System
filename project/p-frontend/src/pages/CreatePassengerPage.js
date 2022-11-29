@@ -41,7 +41,7 @@ function CreatePassengerPage() {
                     type="text" 
                     name="firstName"
                     placeholder="Enter a first name:"
-                    pattern="[a-zA-Z]+"
+                    pattern="^[a-zA-Z \s]+$"
                     required 
                     value={firstName}
                     onChange={e => setFirstName(e.target.value)}
