@@ -59,7 +59,10 @@ function CreateFlightsPage() {
         <legend><strong>Add New Flight to Table</strong></legend>
             <fieldset class="fields">
                 <label>Departure Airport</label>
-                <select value={departureAirport} placeholder="Select..." onChange={e => setDepartureAirport(e.target.value)}>
+                <select value={departureAirport} 
+                        placeholder="Select..." 
+                        required
+                        onChange={e => setDepartureAirport(e.target.value)}>
                     <option value="null">Select...</option>
                     {airports.map((airport, i) =>
                         <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
@@ -67,7 +70,9 @@ function CreateFlightsPage() {
                 </select>
                 
                 <label>Arrival Airport</label>
-                <select value={arrivalAirport} onChange={e => setArrivalAirport(e.target.value)}>
+                <select value={arrivalAirport} 
+                    required
+                    onChange={e => setArrivalAirport(e.target.value)}>
                     <option value="null">Select...</option>
                     {airports.map((airport, i) =>
                         <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
@@ -78,6 +83,7 @@ function CreateFlightsPage() {
                 <input 
                     type="datetime-local" 
                     name="departure-time"
+                    pattern="datetime-local"
                     required
                     value={departureTime}
                     onChange={e => setDepartureTime(e.target.value)}
@@ -86,15 +92,17 @@ function CreateFlightsPage() {
                 <input 
                     type="datetime-local" 
                     name="arrival-time"
+                    pattern="datetime-local"
                     required
                     value={arrivalTime}
                     onChange={e => setArrivalTime(e.target.value)}
                     id="arrival-time" />
                 <label>Airfare</label> 
                 <input 
-                    type="number" 
+                    type="text" 
                     name="airfare"
                     pattern="[0-9]+"
+                    placeholder="Enter Airfare:"
                     required
                     value={airfare}
                     onChange={e => setAirfare(e.target.value)}
@@ -104,6 +112,7 @@ function CreateFlightsPage() {
                     type="number" 
                     name="capacity"
                     pattern="[0-9]+"
+                    placeholder="Enter Capacity:"
                     required
                     value={capacity}
                     onChange={e => setCapacity(e.target.value)}
