@@ -14,8 +14,8 @@ function FlightsTable({ flights, onEdit, onDelete }) {
                     <th>Arrival Time</th>
                     <th>Airfare</th>
                     <th>Capacity</th>
-                    <th>edit</th>
-                    <th>delete</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
