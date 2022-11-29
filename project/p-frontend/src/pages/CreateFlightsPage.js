@@ -78,6 +78,7 @@ function CreateFlightsPage() {
                 <input 
                     type="datetime-local" 
                     name="departure-time"
+                    required
                     value={departureTime}
                     onChange={e => setDepartureTime(e.target.value)}
                     id="departure-time" />
@@ -85,6 +86,7 @@ function CreateFlightsPage() {
                 <input 
                     type="datetime-local" 
                     name="arrival-time"
+                    required
                     value={arrivalTime}
                     onChange={e => setArrivalTime(e.target.value)}
                     id="arrival-time" />
@@ -92,6 +94,8 @@ function CreateFlightsPage() {
                 <input 
                     type="number" 
                     name="airfare"
+                    pattern="[0-9]+"
+                    required
                     value={airfare}
                     onChange={e => setAirfare(e.target.value)}
                     id="phoneNumber" />  
@@ -99,6 +103,8 @@ function CreateFlightsPage() {
                 <input 
                     type="number" 
                     name="capacity"
+                    pattern="[0-9]+"
+                    required
                     value={capacity}
                     onChange={e => setCapacity(e.target.value)}
                     id="capacity" />  
