@@ -31,16 +31,21 @@ function CreatePassengerPage() {
 
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        addPassenger()
+    }
+
   return (
     <>
-    <form onSubmit={(e) => { e.preventDefault();}}>
+    <form onSubmit={e => handleSubmit(e)}>
         <legend><strong>Add New Passenger to Table</strong></legend>
             <fieldset class="fields">
                 <label for="firstName"> First Name </label>
                 <input 
                     type="text" 
                     name="firstName"
-                    placeholder="Enter a first name:"
+                    placeholder="Enter first name:"
                     pattern="^[a-zA-Z \s]+$"
                     required 
                     value={firstName}
@@ -51,7 +56,7 @@ function CreatePassengerPage() {
                 <input 
                     type="text" 
                     name="lastName"
-                    placeholder="Enter a last name:"
+                    placeholder="Enter last name:"
                     pattern="[a-zA-Z]+"
                     required 
                     value={lastName}
@@ -62,7 +67,7 @@ function CreatePassengerPage() {
                 <input 
                     type="passport" 
                     name="passport"
-                    placeholder="Enter a 9 digit passport #:"
+                    placeholder="Enter 9 digit passport #:"
                     required
                     minlength="9"
                     maxlength="9"
@@ -83,8 +88,8 @@ function CreatePassengerPage() {
                 <label for="phone"> Telephone Number </label> 
                 <input type="phone" 
                     name="phone"
-                    placeholder="Enter phone #:"
-                    pattern="[0-9{3}-[0-9]{3}-[0-9]{4}"
+                    placeholder="Enter phone number (###-###-####):"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     required 
                     value={phoneNumber}
                     onChange={e => setPhoneNumber(e.target.value)}
@@ -92,7 +97,6 @@ function CreatePassengerPage() {
                 <label for="submit">
                     <button
                         type="submit"
-                        onClick={addPassenger}
                         id="submit"
                     >Add</button>
                 </label>     

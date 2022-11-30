@@ -50,7 +50,10 @@ function CreateBookingPage({passenger}) {
         navigate('../booking')
     }
 
-
+    const handleSubmit = async e => {
+        e.preventDefault()
+        createBooking()
+    }
 
     // Retrieve ALL Drop Menu Data
     const [flights, setFlights] = useState([]);
@@ -83,10 +86,14 @@ function CreateBookingPage({passenger}) {
         <p>Fill out the following form and the appropriate Itinerary/Tickets will be generated for the given Passenger.</p>
         <p>{`${passenger.first_name} ${passenger.last_name}, Passport: ${passenger.passport}`}</p>
         
-        <form onSubmit={(e) => { e.preventDefault();}}>
+        <form onSubmit={(e) => handleSubmit(e)}>
             <fieldset class="fields">
                 <label>Trip Name</label>
-                <input type="text" placeholder="Enter name for trip..." value={tripName} onChange={e => setTripName(e.target.value)} />
+                <input type="text" 
+                        placeholder="Enter name for trip..."
+                        required  
+                        value={tripName} 
+                        onChange={e => setTripName(e.target.value)} />
                 <label>Flight Class</label>
                 <select value={ticketClass}  onChange={e => setTicketClass(e.target.value)}>
                     <option value="null">Select...</option>
@@ -99,7 +106,7 @@ function CreateBookingPage({passenger}) {
                     return(
                     <>
                     <label>Flight {i+1}</label>
-                    <select value={flightChoices[i]} onChange={e => handleFlightChange(i, e)}>
+                    <select value={flightChoices[i]} required onChange={e => handleFlightChange(i, e)}>
                         <option value="">Select...</option>
                         {flights.map((flight, i) =>
                             <option value={flight.flight_id} key={i}>
@@ -118,7 +125,6 @@ function CreateBookingPage({passenger}) {
                 <label for="submit">
                     <button
                         type="submit"
-                        onClick={createBooking}
                         id="submit"
                     >Book</button>
                 </label>     

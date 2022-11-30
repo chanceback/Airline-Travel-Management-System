@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../API";
 
@@ -17,22 +17,36 @@ function BookingPage({setPassengerResults}) {
         
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        lookupPassenger()
+    }
+
     return(
         <>
         <h1>Book Trip</h1>
         <p>Search Passenger</p>
-        <form onSubmit={(e) => { e.preventDefault();}}>
+        <form onSubmit={(e) => handleSubmit(e)}>
                 <fieldset>
                     <label>First Name</label>
-                    <input type="text" id="first_name" onChange={e => setFirstName(e.target.value)}/>
+                    <input type="text" 
+                            id="first_name"
+                            placeholder="Enter first name:"
+                            pattern="^[a-zA-Z \s]+$"
+                            required 
+                            onChange={e => setFirstName(e.target.value)}/>
                     <label>Last Name</label>
-                    <input type="text" id="last_name" onChange={e => setLastName(e.target.value)}/>
+                    <input type="text" 
+                            id="last_name"
+                            placeholder="Enter last name:"
+                            pattern="[a-zA-Z]+"
+                            required  
+                            onChange={e => setLastName(e.target.value)}/>
                     
                     <label for="submit">
                     <button
                         type="submit"
                         id="submit"
-                        onClick={lookupPassenger}
                     >Search</button>
                     </label>
                 </fieldset>

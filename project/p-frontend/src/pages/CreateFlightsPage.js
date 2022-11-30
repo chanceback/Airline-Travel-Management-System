@@ -35,9 +35,13 @@ function CreateFlightsPage() {
             alert(`Failed to add flight, status code = ${response.status}`)
         };
         navigate('../flights')
-
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        addFlight()
+    }
+    
     // Use state to bring in the data
     const [airports, setAirports] = useState([]);
     
@@ -55,15 +59,14 @@ function CreateFlightsPage() {
 
   return (
     <>
-    <form onSubmit={(e) => { e.preventDefault();}}>
+    <form onSubmit={(e) => handleSubmit(e)}>
         <legend><strong>Add New Flight to Table</strong></legend>
             <fieldset class="fields">
                 <label>Departure Airport</label>
-                <select value={departureAirport} 
-                        placeholder="Select..." 
+                <select value={departureAirport}  
                         required
                         onChange={e => setDepartureAirport(e.target.value)}>
-                    <option value="null">Select...</option>
+                    <option value="">Select...</option>
                     {airports.map((airport, i) =>
                         <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
                     )}
@@ -73,7 +76,7 @@ function CreateFlightsPage() {
                 <select value={arrivalAirport} 
                     required
                     onChange={e => setArrivalAirport(e.target.value)}>
-                    <option value="null">Select...</option>
+                    <option value="">Select...</option>
                     {airports.map((airport, i) =>
                         <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
                     )}
@@ -121,7 +124,6 @@ function CreateFlightsPage() {
                 <label for="submit">
                     <button
                         type="submit"
-                        onClick={addFlight}
                         id="submit"
                     >Add</button>
                 </label>     

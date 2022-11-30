@@ -26,29 +26,41 @@ function UpdateAirportsPage({ airport }){
         navigate('../airports')
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        editAirport()
+    }
+
     return (
         <>
         <h1>Edit an Airports Information</h1>
-        <form onSubmit={(e) => { e.preventDefault();}}>
+        <form onSubmit={e => handleSubmit(e)}>
                 <fieldset>
                     <legend>Airport ID: {airport.airport_id}</legend>
                     <label for="airport_name">Airport Name</label>
                     <input
-                        type="text"
+                        type="airport_name" 
+                        name="airport_name"
+                        placeholder="Enter Airport Name:"
+                        pattern="^[a-zA-Z \s]+$"
+                        required
                         value={airport_name}
                         onChange={e => setAirport_name(e.target.value)} 
                         id="airport_name" />
 
                     <label for="airport_location">Location</label>
                     <input
-                        type="text"
+                        type="airport_location" 
+                        name="airport_location"
+                        placeholder="Enter Airport Location:"
+                        pattern="^[a-zA-Z \s]+$"
+                        required
                         value={airport_location}
                         onChange={e => setAirport_location(e.target.value)} 
                         id="airport_location" />
 
                     <label for="submit">
                     <button
-                        onClick={editAirport}
                         id="submit"
                     >Save</button></label>
                 </fieldset>

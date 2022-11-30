@@ -28,9 +28,14 @@ function CreateTicketClassesPage() {
 
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        addClass()
+    }
+
   return (
     <>
-    <form onSubmit={(e) => { e.preventDefault();}}>
+    <form onSubmit={(e) => handleSubmit(e)}>
         <legend><strong>Add New Class to The Table</strong></legend>
             <fieldset class="fields">
                 <label for ="class_name">Class Name </label> 
@@ -61,7 +66,6 @@ function CreateTicketClassesPage() {
                 <label for="submit">
                     <button
                         type="submit"
-                        onClick={addClass}
                         id="submit"
                     >Add</button>
                 </label>     

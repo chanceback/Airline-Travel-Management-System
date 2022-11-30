@@ -26,12 +26,16 @@ function CreateAirportsPage() {
             alert(`Failed to add exercise, status code = ${response.status}`)
         };
         navigate('../airports')
+    }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        addAirport()
     }
 
   return (
     <>
-    <form onSubmit={(e) => { e.preventDefault();}}>
+    <form onSubmit={(e) => handleSubmit(e)}>
         <legend><strong>Add New Airport to the Table</strong></legend>
             <fieldset class="fields">
                 <label for="airport_id"> Airport ID </label>
@@ -70,7 +74,6 @@ function CreateAirportsPage() {
                 <label for="submit">
                     <button
                         type="submit"
-                        onClick={addAirport}
                         id="submit"
                     >Add</button>
                 </label>     

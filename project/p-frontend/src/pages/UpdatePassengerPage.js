@@ -32,36 +32,58 @@ function UpdatePassengerPage({ passenger }){
         navigate('../passengers')
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        editPassenger()
+    }
+
     return (
         <>
         <h1>Edit a Passengers Information</h1>
-        <form onSubmit={(e) => { e.preventDefault();}}>
+        <form onSubmit={e => handleSubmit(e)}>
                 <fieldset>
                     <legend>Passenger ID: {passenger.passenger_id}</legend>
                     <label for="firstName">First Name</label>
                     <input
-                        type="text"
+                        type="text" 
+                        name="firstName"
+                        placeholder="Enter first name:"
+                        pattern="^[a-zA-Z \s]+$"
+                        required 
                         value={firstName}
                         onChange={e => setFirstName(e.target.value)} 
                         id="firstName" />
                     
                     <label for="lastName">Last Name</label>
                     <input
-                        type="text"
-                        value={lastName}
+                        type="text" 
+                        name="lastName"
+                        placeholder="Enter last name:"
+                        pattern="[a-zA-Z]+"
+                        required 
                         onChange={e => setLastName(e.target.value)} 
                         id="lastName" />
 
                     <label for="passport">Passport</label>
                     <input
-                        type="text"
+                        type="passport" 
+                        name="passport"
+                        placeholder="Enter 9 digit passport #:"
+                        required
+                        minlength="9"
+                        maxlength="9"
                         value={passport}
                         onChange={e => setPassport(e.target.value)} 
                         id="passport" />
 
                     <label for="email">Email</label>
                     <input
-                        type="email"
+                        type="email" 
+                        name="email"
+                        placeholder="Enter @hello.com e-mail address:"
+                        pattern=".+@hello\.com"
+                        size="30"
+                        required
                         value={email}
                         onChange={e => setEmail(e.target.value)} 
                         id="email" >
@@ -69,14 +91,16 @@ function UpdatePassengerPage({ passenger }){
 
                     <label for="phoneNumber">Phone Number</label>
                     <input
-                        type="text"
+                        name="phone"
+                        placeholder="Enter phone number (###-###-####):"
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        required 
                         value={phoneNumber}
                         onChange={e => setPhoneNumber(e.target.value)}
                         id="phoneNumber" />
 
                     <label for="submit">
                     <button
-                        onClick={editPassenger}
                         id="submit"
                     >Save</button></label>
                 </fieldset>

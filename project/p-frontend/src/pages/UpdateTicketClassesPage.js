@@ -26,28 +26,41 @@ function UpdateTicketClassesPage({ ticketClass }){
         navigate('../ticket-classes')
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        editClasses()
+    }
+
     return (
         <>
         <h1>Edit Class Information</h1>
-        <form onSubmit={(e) => { e.preventDefault();}}>
+        <form onSubmit={e => handleSubmit(e)}>
                 <fieldset>
                     <legend>Class ID: {ticketClass.class_id}</legend>
                     <label for="class_name">Class Name</label>
                     <input
                         type="text"
+                        placeholder="Enter Class Name:"
+                        pattern="^[a-zA-Z \s]+$"
+                        maxlength="15"
+                        required 
                         value={class_name}
                         onChange={e => setClass_name(e.target.value)} 
                         id="class_name" />
                     <label for="upgrade_charge">Upgrade</label>
                     <input
-                        type="text"
+                        type="number"
+                        placeholder="Enter Upgrade Charge:"
+                        pattern="[0-9]+"
+                        maxlength="5"
+                        minlength="3"
+                        required
                         value={upgrade_charge}
                         onChange={e => setUpgrade_charge(e.target.value)} 
                         id="upgrade_charge" />
 
                     <label for="submit">
                     <button
-                        onClick={editClasses}
                         id="submit"
                     >Save</button></label>
                 </fieldset>

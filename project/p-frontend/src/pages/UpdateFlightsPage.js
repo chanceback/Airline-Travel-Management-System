@@ -35,6 +35,11 @@ function UpdateFlightsPage({ flight }){
         navigate('../flights')
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+        editFlight()
+    }
+
     // Use state to bring in the data
     const [airports, setAirports] = useState([]);
     
@@ -54,18 +59,18 @@ function UpdateFlightsPage({ flight }){
     return (
         <>
         <h1>Edit a Flights Information</h1>
-        <form onSubmit={(e) => { e.preventDefault();}}>
+        <form onSubmit={e => handleSubmit(e)}>
         <legend><strong>Edit Flight: {flight.flight_id}</strong></legend>
             <fieldset class="fields">
                 <label>Departure Airport</label>
-                <select value={departureAirport} onChange={e => setDepartureAirport(e.target.value)}>
+                <select value={departureAirport} required onChange={e => setDepartureAirport(e.target.value)}>
                     {airports.map((airport, i) =>
                         <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
                     )}
                 </select>
                 
                 <label>Arrival Airport</label>
-                <select value={arrivalAirport} onChange={e => setArrivalAirport(e.target.value)}>
+                <select value={arrivalAirport} required onChange={e => setArrivalAirport(e.target.value)}>
                     {airports.map((airport, i) =>
                         <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
                     )}
@@ -75,6 +80,8 @@ function UpdateFlightsPage({ flight }){
                 <input 
                     type="datetime-local" 
                     name="departure-time"
+                    pattern="datetime-local"
+                    required
                     value={departureTime}
                     onChange={e => setDepartureTime(e.target.value)}
                     id="departure-time" />
@@ -82,6 +89,8 @@ function UpdateFlightsPage({ flight }){
                 <input 
                     type="datetime-local" 
                     name="arrival-time"
+                    pattern="datetime-local"
+                    required
                     value={arrivalTime}
                     onChange={e => setArrivalTime(e.target.value)}
                     id="arrival-time" />
@@ -89,6 +98,9 @@ function UpdateFlightsPage({ flight }){
                 <input 
                     type="number" 
                     name="airfare"
+                    pattern="[0-9]+"
+                    placeholder="Enter Airfare:"
+                    required
                     value={airfare}
                     onChange={e => setAirfare(e.target.value)}
                     id="phoneNumber" />  
@@ -96,6 +108,9 @@ function UpdateFlightsPage({ flight }){
                 <input 
                     type="number" 
                     name="capacity"
+                    pattern="[0-9]+"
+                    placeholder="Enter Capacity:"
+                    required
                     value={capacity}
                     onChange={e => setCapacity(e.target.value)}
                     id="capacity" />  
@@ -103,7 +118,6 @@ function UpdateFlightsPage({ flight }){
                 <label for="submit">
                     <button
                         type="submit"
-                        onClick={editFlight}
                         id="submit"
                     >Save</button>
                 </label>     
