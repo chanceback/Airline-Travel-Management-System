@@ -8,7 +8,7 @@ function AirportsPage({ setAirportToUpdate }) {
     // Use navigate for updating
     const navigate = useNavigate()
 
-    // Use state to bring in the data
+    // Use state to load airports into table
     const [airports, setAirports] = useState([]);
     
     // RETRIEVE the list of airports

@@ -144,7 +144,7 @@ ins {}
 table {
   border-collapse: collapse;
   border: 3px solid #414A4C;
-  margin: 10px;
+  margin: auto;
 }
 caption {}
 thead {}

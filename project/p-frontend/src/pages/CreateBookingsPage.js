@@ -84,10 +84,12 @@ function CreateBookingPage({passenger}) {
         <>
         <h1>Book Trip</h1>
         <p>Fill out the following form and the appropriate Itinerary/Tickets will be generated for the given Passenger.</p>
-        <p>{`${passenger.first_name} ${passenger.last_name}, Passport: ${passenger.passport}`}</p>
+        <p>The submission of this form acts as the INSERT for Tickets & Itineraries.</p>
+        <p>Between 1-5 Flights can be selected for a Flight Path.</p>
         
         <form onSubmit={(e) => handleSubmit(e)}>
             <fieldset class="fields">
+                <p>{`Name: ${passenger.first_name} ${passenger.last_name}`} | {`Passport: ${passenger.passport}`} </p>
                 <label>Trip Name</label>
                 <input type="text" 
                         placeholder="Enter name for trip..."
@@ -129,9 +131,7 @@ function CreateBookingPage({passenger}) {
                     >Book</button>
                 </label>     
             </fieldset>
-	</form> 
-
-        <p>The submission of this form acts as the INSERT for Tickets & Itineraries</p>
+	        </form> 
         </>
     )
 };

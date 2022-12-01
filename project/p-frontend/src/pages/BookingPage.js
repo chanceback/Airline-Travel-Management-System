@@ -25,9 +25,11 @@ function BookingPage({setPassengerResults}) {
     return(
         <>
         <h1>Book Trip</h1>
-        <p>Search Passenger</p>
+        <p>Who is booking this trip?</p>
+        <p>The results of this process act as the CREATE for Tickets and Itineraries</p>
         <form onSubmit={(e) => handleSubmit(e)}>
                 <fieldset>
+                <caption>Search Passenger</caption>
                     <label>First Name</label>
                     <input type="text" 
                             id="first_name"
@@ -51,9 +53,6 @@ function BookingPage({setPassengerResults}) {
                     </label>
                 </fieldset>
         </form>
-
-
-        <p>The results of this process act as the CREATE for Tickets and Itineraries</p>
         </>
     )
 };

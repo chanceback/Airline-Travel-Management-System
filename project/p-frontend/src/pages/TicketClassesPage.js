@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 function TicketClassesPage({ setTicketClassToUpdate }) {
     // Use navigate for updating
     const navigate = useNavigate()
-    // Use state to bring in the data
+
+    // Use state to bring in the ticket classes data
     const [ticketClasses, setTicketClasses] = useState([]);
 
     // RETRIEVE the list of ticket classes

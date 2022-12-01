@@ -3,7 +3,6 @@ import { API_URL } from '../API';
 import { useNavigate } from 'react-router-dom';
 
 function CreatePassengerPage() {
-
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [passport, setPassport] = useState('')
@@ -25,7 +24,7 @@ function CreatePassengerPage() {
             alert("Successfully added the passenger!")
 
         } else {
-            alert(`Failed to add exercise, status code = ${response.status}`)
+            alert(`Failed to add passenger, status code = ${response.status}`)
         };
         navigate('../passengers')
 
@@ -38,7 +37,7 @@ function CreatePassengerPage() {
 
   return (
     <>
-    <form onSubmit={e => handleSubmit(e)}>
+    <form onSubmit={(e) => handleSubmit(e)}>
         <legend><strong>Add New Passenger to Table</strong></legend>
             <fieldset class="fields">
                 <label for="firstName"> First Name </label>

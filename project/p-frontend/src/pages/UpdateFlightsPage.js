@@ -30,7 +30,7 @@ function UpdateFlightsPage({ flight }){
             alert("Successfully edited the flight!");
         } else {
             const errMessage = await response.json();
-            alert(`Failed to update exercise. Status ${response.status}. ${errMessage.Error}`);
+            alert(`Failed to update flight. Status ${response.status}. ${errMessage.Error}`);
         }
         navigate('../flights')
     }

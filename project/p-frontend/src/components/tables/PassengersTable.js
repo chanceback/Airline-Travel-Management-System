@@ -5,7 +5,6 @@ function PassengersTable({ passengers, onEdit, onDelete }) {
 
     return (
         <table id="passengers">
-            <caption>Current Passengers</caption>
             <thead>
                 <tr>
                     <th>Passenger ID</th>

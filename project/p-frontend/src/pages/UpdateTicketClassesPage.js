@@ -21,7 +21,7 @@ function UpdateTicketClassesPage({ ticketClass }){
             alert("Successfully edited the class!");
         } else {
             const errMessage = await response.json();
-            alert(`Failed to update exercise. Status ${response.status}. ${errMessage.Error}`);
+            alert(`Failed to update class. Status ${response.status}. ${errMessage.Error}`);
         }
         navigate('../ticket-classes')
     }

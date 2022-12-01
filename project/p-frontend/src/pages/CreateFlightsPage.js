@@ -3,7 +3,6 @@ import { API_URL } from '../API';
 import { useNavigate } from 'react-router-dom';
 
 function CreateFlightsPage() {
-
     const [departureAirport, setDepartureAirport] = useState('')
     const [arrivalAirport, setArrivalAirport] = useState('')
     const [departureTime, setDepartureTime] = useState('')

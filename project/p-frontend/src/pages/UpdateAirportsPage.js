@@ -21,7 +21,7 @@ function UpdateAirportsPage({ airport }){
             alert("Successfully edited the airport!");
         } else {
             const errMessage = await response.json();
-            alert(`Failed to update exercise. Status ${response.status}. ${errMessage.Error}`);
+            alert(`Failed to update airport. Status ${response.status}. ${errMessage.Error}`);
         }
         navigate('../airports')
     }

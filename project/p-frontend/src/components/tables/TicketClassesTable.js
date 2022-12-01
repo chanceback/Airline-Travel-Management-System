@@ -4,7 +4,6 @@ import { MdDeleteForever, MdEdit } from 'react-icons/md';
 function TicketClassesTable({ ticketClasses, onEdit, onDelete }) {
     return (
         <table id="ticket_classes">
-            <caption>Current Classes</caption>
             <thead>
                 <tr>
                     <th>Class ID</th>

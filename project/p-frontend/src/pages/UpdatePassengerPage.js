@@ -27,7 +27,7 @@ function UpdatePassengerPage({ passenger }){
             alert("Successfully edited passenger!");
         } else {
             const errMessage = await response.json();
-            alert(`Failed to update exercise. Status ${response.status}. ${errMessage.Error}`);
+            alert(`Failed to update passenger. Status ${response.status}. ${errMessage.Error}`);
         }
         navigate('../passengers')
     }
@@ -39,7 +39,7 @@ function UpdatePassengerPage({ passenger }){
 
     return (
         <>
-        <h1>Edit a Passengers Information</h1>
+        <h1>Edit a Passenger's Information</h1>
         <form onSubmit={e => handleSubmit(e)}>
                 <fieldset>
                     <legend>Passenger ID: {passenger.passenger_id}</legend>

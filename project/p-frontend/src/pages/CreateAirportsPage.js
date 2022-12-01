@@ -3,7 +3,6 @@ import { API_URL } from '../API';
 import { useNavigate } from 'react-router-dom';
 
 function CreateAirportsPage() {
-
     const [airport_id, setAirport_id] = useState('')
     const [airport_name, setAirport_name] = useState('')
     const [airport_location, setAirport_location] = useState('')
@@ -23,7 +22,7 @@ function CreateAirportsPage() {
             alert("Successfully added the Airport!")
 
         } else {
-            alert(`Failed to add exercise, status code = ${response.status}`)
+            alert(`Failed to add airport, status code = ${response.status}`)
         };
         navigate('../airports')
     }

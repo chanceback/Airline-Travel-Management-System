@@ -4,7 +4,6 @@ import { MdDeleteForever, MdEdit } from 'react-icons/md';
 function AirportsTable({ airports, onEdit, onDelete }) {
     return (
         <table id="airports">
-            <caption>Current Airports</caption>
             <thead>
                 <tr>
                     <th>Airport ID</th>

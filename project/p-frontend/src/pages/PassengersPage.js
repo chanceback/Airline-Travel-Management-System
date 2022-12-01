@@ -5,13 +5,13 @@ import { API_URL } from '../API';
 import { useNavigate } from 'react-router-dom';
 
 function PassengersPage({ setPassengerToUpdate }) {
-    // Use navigate for updating
-    const navigate = useNavigate()
-
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
 
-    // Use state to bring in the data
+    // Use navigate for updating and creating
+    const navigate = useNavigate()
+
+    // Use state to load data into table
     const [passengers, setPassengers] = useState([]);
 
     // RETRIEVE the list of passengers
@@ -45,6 +45,7 @@ function PassengersPage({ setPassengerToUpdate }) {
         }
     }
 
+    // Search a Passenger
     const lookupPassenger = async () =>{
         const response = await fetch(`${API_URL}/passengers/${firstName}/${lastName}`);
         const passengers = await response.json();
@@ -61,13 +62,12 @@ function PassengersPage({ setPassengerToUpdate }) {
         loadPassengers();
     }, []);
 
-
-
     return(
         <>
-        <p>Search Passenger</p>
+        <h1>Passengers</h1>
         <form onSubmit={(e) => handleSubmit(e)}>
                 <fieldset>
+                <caption>Search Passenger</caption>
                     <label>First Name</label>
                     <input type="text" 
                             id="first_name"

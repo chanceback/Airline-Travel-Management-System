@@ -8,7 +8,7 @@ function ItinerariesPage({ setItineraryToView }) {
     // Use navigate for updating
     const navigate = useNavigate()
 
-    // Use state to bring in the data
+    // Use state to store Itineraries data from servers
     const [itineraries, setItineraries] = useState([]);
     
     // RETRIEVE list of flights

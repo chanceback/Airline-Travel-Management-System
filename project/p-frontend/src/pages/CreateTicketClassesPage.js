@@ -3,7 +3,6 @@ import { API_URL } from '../API';
 import { useNavigate } from 'react-router-dom';
 
 function CreateTicketClassesPage() {
-
     const [class_name, setClass_name] = useState('')
     const [upgrade_charge, setUpgrade_charge] = useState('')
 

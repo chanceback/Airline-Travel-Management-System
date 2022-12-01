@@ -23,8 +23,8 @@ function TicketsPage() {
     return(
         <>
         <h1>Tickets</h1>
-        <TicketsTable tickets={tickets} />
         <p>Tickets are created through the booking page. To delete a ticket, delete the Itinerary containing the ticket.</p>
+        <TicketsTable tickets={tickets} />
         </>
     )
 };
