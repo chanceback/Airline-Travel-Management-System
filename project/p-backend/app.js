@@ -7,7 +7,7 @@ const express = require('express');   // We are using the express library for th
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        =  11789;                 // Set a port number at the top so it's easy to change in the future
+PORT        =  11856;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 const db = require('./database/db-connector').pool
@@ -173,7 +173,7 @@ app.get('/flights-table', (req, res) => {
             a_airport.airport_name as Arrival, CAST(Flights.departure_time AS char) as dt, 
             CAST(Flights.arrival_time AS char) as at, Flights.air_fare, Flights.capacity 
             FROM Flights 
-            JOIN Airports as d_airport ON d_airport.airport_id = 
+            LEFT JOIN Airports as d_airport ON d_airport.airport_id = 
             Flights.departure_airport JOIN Airports as a_airport 
             ON a_airport.airport_id = Flights.arrival_airport`);
     db.query(sqlSelect, (err, result) => {
@@ -203,7 +203,7 @@ app.get('/itineraries/:id', (req, res) => {
             a_airport.airport_name as Arrival, CAST(Flights.departure_time AS char) as dt, 
             CAST(Flights.arrival_time AS char) as at, Flights.air_fare, Flights.capacity 
             FROM Flights 
-            JOIN Airports as d_airport ON d_airport.airport_id = 
+            LEFT JOIN Airports as d_airport ON d_airport.airport_id = 
             Flights.departure_airport JOIN Airports as a_airport 
             ON a_airport.airport_id = Flights.arrival_airport
             JOIN Tickets ON Tickets.flight_id = Flights.flight_id
@@ -282,10 +282,12 @@ app.put('/flights/:id', (req, res) => {
     const arrival_time = req.body.arrival_time
     const air_fare = req.body.air_fare
     const capacity = req.body.capacity
-    const sqlUpdate = 
-        "UPDATE Flights SET departure_airport = ?, arrival_airport = ?, departure_time = CAST(? AS datetime), arrival_time = CAST(? AS datetime), air_fare = ?, capacity = ? WHERE flight_id = ?"
+
+    if (departure_airport === '' && arrival_airport === ''){
+        const sqlUpdate = 
+        "UPDATE Flights SET departure_airport = NULL, arrival_airport = NULL, departure_time = CAST(? AS datetime), arrival_time = CAST(? AS datetime), air_fare = ?, capacity = ? WHERE flight_id = ?"
     
-    db.query(sqlUpdate, [departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity, id], (err, result) => {
+        db.query(sqlUpdate, [departure_time, arrival_time, air_fare, capacity, id], (err, result) => {
         if (err) {
             console.log(err)
             res.sendStatus(404)
@@ -294,6 +296,47 @@ app.put('/flights/:id', (req, res) => {
             res.sendStatus(200)
         }
     })
+    } else if (departure_airport === ''){
+        const sqlUpdate = 
+        "UPDATE Flights SET departure_airport = NULL, arrival_airport = ?, departure_time = CAST(? AS datetime), arrival_time = CAST(? AS datetime), air_fare = ?, capacity = ? WHERE flight_id = ?"
+    
+        db.query(sqlUpdate, [arrival_airport, departure_time, arrival_time, air_fare, capacity, id], (err, result) => {
+        if (err) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(200)
+        }
+    })
+    } else if (arrival_airport === ''){
+        const sqlUpdate = 
+        "UPDATE Flights SET departure_airport = ?, arrival_airport = NULL, departure_time = CAST(? AS datetime), arrival_time = CAST(? AS datetime), air_fare = ?, capacity = ? WHERE flight_id = ?"
+    
+        db.query(sqlUpdate, [departure_airport, departure_time, arrival_time, air_fare, capacity, id], (err, result) => {
+        if (err) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(200)
+        }
+    })
+    } else {
+        const sqlUpdate = 
+        "UPDATE Flights SET departure_airport = ?, arrival_airport = ?, departure_time = CAST(? AS datetime), arrival_time = CAST(? AS datetime), air_fare = ?, capacity = ? WHERE flight_id = ?"
+    
+        db.query(sqlUpdate, [departure_airport, arrival_airport, departure_time, arrival_time, air_fare, capacity, id], (err, result) => {
+        if (err) {
+            console.log(err)
+            res.sendStatus(404)
+        } else{
+            console.log(result)
+            res.sendStatus(200)
+        }
+    })
+    }
+    
 })
 
 // UPDATE Ticket Class

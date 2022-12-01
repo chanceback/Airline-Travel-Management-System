@@ -63,17 +63,19 @@ function UpdateFlightsPage({ flight }){
         <legend><strong>Edit Flight: {flight.flight_id}</strong></legend>
             <fieldset class="fields">
                 <label>Departure Airport</label>
-                <select value={departureAirport} required onChange={e => setDepartureAirport(e.target.value)}>
+                <select value={departureAirport} onChange={e => setDepartureAirport(e.target.value)}>
                     {airports.map((airport, i) =>
                         <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
                     )}
+                    <option value=''>none</option>
                 </select>
                 
                 <label>Arrival Airport</label>
-                <select value={arrivalAirport} required onChange={e => setArrivalAirport(e.target.value)}>
+                <select value={arrivalAirport} onChange={e => setArrivalAirport(e.target.value)}>
                     {airports.map((airport, i) =>
                         <option value={airport.airport_id} key={i}>{airport.airport_name}</option>
                     )}
+                    <option value=''>none</option>
                 </select>
 
                 <label>Departure Time</label> 
