@@ -38,8 +38,8 @@ CREATE TABLE Airports(
 -- -----------------------------------------------------
 CREATE TABLE Flights(
     flight_id int AUTO_INCREMENT NOT NULL,
-    departure_airport varchar(4),
-    arrival_airport varchar(4),
+    departure_airport varchar(4) DEFAULT NULL,
+    arrival_airport varchar(4) DEFAULT NULL,
     departure_time datetime NOT NULL,
     arrival_time datetime NOT NULL,
     air_fare int NOT NULL,
