@@ -8,6 +8,9 @@ function PassengersPage({ setPassengerToUpdate }) {
     // Use navigate for updating
     const navigate = useNavigate()
 
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+
     // Use state to bring in the data
     const [passengers, setPassengers] = useState([]);
 
@@ -42,6 +45,17 @@ function PassengersPage({ setPassengerToUpdate }) {
         }
     }
 
+    const lookupPassenger = async () =>{
+        const response = await fetch(`${API_URL}/passengers/${firstName}/${lastName}`);
+        const passengers = await response.json();
+        setPassengers(passengers);
+    }
+
+    const handleSubmit = async e => {
+        e.preventDefault()
+        lookupPassenger()
+    }
+
     // LOAD the Passengers
     useEffect(() => {
         loadPassengers();
@@ -51,11 +65,24 @@ function PassengersPage({ setPassengerToUpdate }) {
 
     return(
         <>
-        <h1>Passengers</h1>
-
-            <form onSubmit={(e) => { e.preventDefault();}}>
+        <p>Search Passenger</p>
+        <form onSubmit={(e) => handleSubmit(e)}>
                 <fieldset>
-                    <label>Lookup Passenger by Passport #</label><input type="text" name="search_passenger" />
+                    <label>First Name</label>
+                    <input type="text" 
+                            id="first_name"
+                            placeholder="Enter first name:"
+                            pattern="^[a-zA-Z \s]+$"
+                            required 
+                            onChange={e => setFirstName(e.target.value)}/>
+                    <label>Last Name</label>
+                    <input type="text" 
+                            id="last_name"
+                            placeholder="Enter last name:"
+                            pattern="[a-zA-Z]+"
+                            required  
+                            onChange={e => setLastName(e.target.value)}/>
+                    
                     <label for="submit">
                     <button
                         type="submit"
@@ -63,7 +90,7 @@ function PassengersPage({ setPassengerToUpdate }) {
                     >Search</button>
                     </label>
                 </fieldset>
-            </form>
+        </form>
 
             <PassengersTable
                     passengers={passengers} 
