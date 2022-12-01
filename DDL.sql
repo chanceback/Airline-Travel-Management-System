@@ -45,8 +45,8 @@ CREATE TABLE Flights(
     air_fare int NOT NULL,
     capacity int NOT NULL,
     PRIMARY KEY (flight_id),
-    FOREIGN KEY (departure_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE,
-    FOREIGN KEY (arrival_airport) REFERENCES Airports(airport_id) ON DELETE CASCADE
+    FOREIGN KEY (departure_airport) REFERENCES Airports(airport_id) ON DELETE SET NULL,
+    FOREIGN KEY (arrival_airport) REFERENCES Airports(airport_id) ON DELETE SET NULL
 );
 
 -- -----------------------------------------------------
