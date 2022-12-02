@@ -16,32 +16,32 @@
     * Originality: Adapted
 
     * Source:(https://www.freecodecamp.org/news/build-dynamic-forms-in-react/)
-    * Date: 10/01/2022
+    * Date: 11/10/2022
     * Scope: Booking Form - used to learn how to create adaptive form fields
     * Originality: Adapted
 
     * Source:(https://www.youtube.com/watch?v=_S2GKnFpdtE&ab_channel=PedroTech)
-    * Date: 10/01/2022
+    * Date: 10/30/2022
     * Scope: Connecting React App to backend, backend to server side
     * Originality: Adapted
     
     * Source: (https://html.com/attributes/input-pattern/)
-    * Date: 11/29/2022
+    * Date: 11/22/2022
     * Scope: Form inputs - required pattern input, [A-Za-z0-9]+
     * Originality: Adapted
    
     * Source: (https://www.w3schools.com/tags/att_input_pattern.asp)
-    * Date: 11/29/2022
+    * Date: 11/24/2022
     * Scope: HTML sections - Used to learn about html attribute patterns / validation
     * Originality: Adapted
     
     * Source: (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/tel)
-    * Date: 11/29/2022
+    * Date: 11/26/2022
     * Scope: Forms - Used to learn about html attribute patterns & validation / Source Code for "[0-9]{3}-[0-9]{3}-[0-9]{4}"
     * Originality: Copied
 
     * Source: (https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/pattern)
-    * Date: 11/29/2022
+    * Date: 11/27/2022
     * Scope: Forms - Used to learn about html attribute patterns / validation
     * Originality: Adapted
 
