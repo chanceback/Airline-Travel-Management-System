@@ -25,9 +25,8 @@ function ViewItineraryPage({ itinerary }){
 
     return (
         <>
-        <h1>Itinerary Name</h1>
-        <p>{itinerary.itinerary_name}</p>
-        <h2>Flight Path Information</h2>
+        <h1>Flight Path Information</h1>
+        <p>{`Trip Name: ${itinerary.trip_name}`}</p>
         <ItineraryViewTable itinerary={flightPath} />
         <button onClick={() => navigate('../itineraries')}>Back</button>
         </>
