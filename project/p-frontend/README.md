@@ -1,4 +1,11 @@
 # CITATIONS
+
+     *[[https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/pattern](https://github.com/cback-CS290/Exercise-App---MERN-Stack-Demonstration))
+    * 11/29/2022
+    * CSS
+    * Source Code
+    * Own Github
+    
     *[https://html.com/attributes/input-pattern/)
     * 11/29/2022
     * Used for code for required pattern input, [A-Za-z0-9]+
@@ -22,7 +29,6 @@
     * Used to learn about html attribute patterns / validation
     * Source Code
     * developer.mozilla.org
-
 
 # Steps to running p-frontend on flip server
     # Make sure running node v16.5.0 or similar
