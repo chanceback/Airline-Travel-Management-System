@@ -7,7 +7,7 @@ const express = require('express');   // We are using the express library for th
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        =  11856;                 // Set a port number at the top so it's easy to change in the future
+PORT        =  11956;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 const db = require('./database/db-connector').pool
