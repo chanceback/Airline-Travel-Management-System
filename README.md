@@ -1,7 +1,7 @@
 # Airline-Travel-Management-System
 
 ## About
-Proof of concept CRUD (Create, React, Update, Delete) site with database interaction.
+This is a proof of concept CRUD (Create, Retrieve, Update, Delete) site with database interaction.
 
 This site is meant to be used by a theoretical airline. The user is able to insert new entries, update entries, delete entries, search and view existing entries for a variety of airline-related applications.
 
