@@ -2,6 +2,7 @@
 
 ## About
 Proof of concept CRUD (Create, React, Update, Delete) site with database interaction.
+
 This site is meant to be used by a theoretical airline. The user is able to insert new entries, update entries, delete entries, search and view existing entries for a variety of airline-related applications.
 
 ### Technologies Used
@@ -40,4 +41,5 @@ An SQL database will need to be set up and the appropriate credentials entered i
 From there run the [DDL.sql](https://github.com/chanceback/Airline-Travel-Management-System/blob/main/DDL.sql) file to get the appropriate table structure and example data.
 ** How to run locally **
 Frontend: Use `npm install` to download the required modules. Then from there run `npm start`.
+
 Backend: Similarly, use `npm install to download the required modules. Then from there run `node app.js`.
