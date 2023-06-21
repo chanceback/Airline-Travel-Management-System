@@ -1,1 +1,1 @@
-export const API_URL = "http://flip2.engr.oregonstate.edu:11956";
+export const API_URL = "http://localhost:11956";

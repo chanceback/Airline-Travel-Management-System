@@ -1,6 +1,10 @@
 SET FOREIGN_KEY_CHECKS = 0;
 SET AUTOCOMMIT = 0;
 
+DROP DATABASE IF EXISTS airline_manager;
+CREATE DATABASE airline_manager;
+USE airline_manager;
+
 DROP TABLE IF EXISTS Tickets;
 DROP TABLE IF EXISTS Ticket_Classes;
 DROP TABLE IF EXISTS Itineraries;
