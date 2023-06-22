@@ -49,4 +49,4 @@ Frontend: Use `npm install` to download the required modules. Then from there ru
 Backend: Similarly, use `npm install` to download the required modules. Then from there run `node app.js`.
 
 
-*README structure was inspired by [the Hospital-Website](https://github.com/solderq35/hospital-website) repo from [solderq35](https://solderq35.github.io/)*
+*The README structure for this project was inspired by [the Hospital-Website](https://github.com/solderq35/hospital-website) repo from [solderq35](https://solderq35.github.io/)*
