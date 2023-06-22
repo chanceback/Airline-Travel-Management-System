@@ -47,3 +47,6 @@ From there run the [DDL.sql](https://github.com/chanceback/Airline-Travel-Manage
 Frontend: Use `npm install` to download the required modules. Then from there run `npm start`.
 
 Backend: Similarly, use `npm install` to download the required modules. Then from there run `node app.js`.
+
+
+README structure was inspired by [the Hospital-Website](https://github.com/solderq35/hospital-website) repo from [solderq35](https://solderq35.github.io/)
