@@ -45,4 +45,4 @@ From there run the [DDL.sql](https://github.com/chanceback/Airline-Travel-Manage
 
 Frontend: Use `npm install` to download the required modules. Then from there run `npm start`.
 
-Backend: Similarly, use `npm install to download the required modules. Then from there run `node app.js`.
+Backend: Similarly, use `npm install` to download the required modules. Then from there run `node app.js`.
