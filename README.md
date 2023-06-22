@@ -36,13 +36,13 @@ Deleting the itinerary removes it from the Itineraries Page:
 ![Clicking Delete Button](https://drive.google.com/uc?export=view&id=1rlfbeHLypF8VvT9qEobD15X1qduM3tZC)
 
 ## Usage Setup
-** SQL Database Setup **
+***SQL Database Setup***
 
 An SQL database will need to be set up and the appropriate credentials entered into the [db-connector.js](https://github.com/chanceback/Airline-Travel-Management-System/blob/main/project/p-backend/database/db-connector.js) file.
 
 From there run the [DDL.sql](https://github.com/chanceback/Airline-Travel-Management-System/blob/main/DDL.sql) file to get the appropriate table structure and example data.
 
-** How to run locally **
+***How to run locally***
 
 Frontend: Use `npm install` to download the required modules. Then from there run `npm start`.
 
